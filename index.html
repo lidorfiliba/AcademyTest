@@ -1203,6 +1203,47 @@ document.addEventListener('click',function(e){
 });
 function scrollToId(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});}
 
+var _lastScrollY=0;
+
+function gotoGlossary(sectionId,terms){
+  _lastScrollY=window.scrollY;
+  var backBtn=document.getElementById('glossary-back-btn');
+  if(backBtn)backBtn.style.display='flex';
+  var el=document.getElementById(sectionId);
+  if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+  if(!terms)return;
+  setTimeout(function(){
+    document.querySelectorAll('.gls-highlight').forEach(function(e){e.classList.remove('gls-highlight');});
+    var list=terms.split(',');
+    var first=null;
+    list.forEach(function(term){
+      term=term.trim();
+      document.querySelectorAll('.gls-term').forEach(function(el){
+        if(el.textContent.indexOf(term)!==-1){
+          el.classList.add('gls-highlight');
+          if(!first)first=el;
+        }
+      });
+      document.querySelectorAll('#'+sectionId+' strong').forEach(function(el){
+        if(el.textContent.indexOf(term)!==-1){
+          el.classList.add('gls-highlight');
+          if(!first)first=el;
+        }
+      });
+    });
+    if(first)first.scrollIntoView({behavior:'smooth',block:'center'});
+  },600);
+}
+
+function goBackFromGlossary(){
+  window.scrollTo({top:_lastScrollY,behavior:'smooth'});
+  setTimeout(function(){
+    var backBtn=document.getElementById('glossary-back-btn');
+    if(backBtn)backBtn.style.display='none';
+    document.querySelectorAll('.gls-highlight').forEach(function(e){e.classList.remove('gls-highlight');});
+  },800);
+}
+
 // Quiz
 function answer(qId,type,el){
   const c=document.getElementById(qId);
