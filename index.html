@@ -342,35 +342,6 @@ mark{background:var(--accent-dim);color:var(--accent);padding:1px 6px;border-rad
 }
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
 
-/* ── QUIZ OPTION REPAIR — ensure clickability from encrypted content ── */
-#course-encrypted-container .quiz-option{
-  cursor:pointer !important;
-  user-select:none;
-  transition:all .18s !important;
-  pointer-events:all !important;
-}
-#course-encrypted-container .quiz-option:hover:not(.correct):not(.wrong):not(.disabled){
-  border-color:var(--border2) !important;
-  background:var(--surface2) !important;
-  color:var(--text) !important;
-}
-#course-encrypted-container .quiz-option.correct{
-  border-color:var(--accent) !important;
-  background:var(--accent-dim) !important;
-  color:var(--accent) !important;
-  pointer-events:none !important;
-}
-#course-encrypted-container .quiz-option.wrong{
-  border-color:var(--red) !important;
-  background:var(--red-dim) !important;
-  color:var(--red) !important;
-  pointer-events:none !important;
-}
-#course-encrypted-container .quiz-option.disabled{
-  opacity:.35 !important;
-  pointer-events:none !important;
-}
-
 /* ── LOGIN GATE ── */
 #login-gate{position:fixed;inset:0;z-index:99998;background:var(--bg);display:flex;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;}
 #login-gate.hidden{display:none;}
@@ -758,6 +729,7 @@ body.login-open{overflow:hidden;position:fixed;width:100%;}
 
     <!-- Exam + Glossary -->
     <button class="nav-special nav-exam" onclick="scrollToId('exam')">🏆 מבחן</button>
+    <button class="nav-special" style="background:rgba(167,139,250,0.1);color:var(--purple);border:1px solid rgba(167,139,250,0.2);font-size:.7rem;padding:6px 12px;border-radius:8px;cursor:pointer;white-space:nowrap;transition:all .18s;font-family:'Heebo',sans-serif;font-weight:700;" onclick="scrollToId('ch-options-guide')">🎯 מדריך אופציות</button>
     <button class="nav-special nav-glossary" onclick="scrollToId('glossary')">📖</button>
 
   </div>
@@ -803,6 +775,219 @@ body.login-open{overflow:hidden;position:fixed;width:100%;}
 
 <div id="main-content" style="display:none">
 <div id="course-encrypted-container"></div>
+
+<!-- ── מדריך אופציות — מתי לקנות/למכור ── -->
+<div id="options-guide" style="display:none">
+<div class="course-wrap">
+<div class="chapter" id="ch-options-guide" style="border-bottom:none;padding-top:40px">
+  <div class="chapter-header">
+    <div class="chapter-num purple">🎯</div>
+    <div>
+      <div class="chapter-title">מדריך מתי לקנות ומתי למכור — CALL / PUT</div>
+      <div class="chapter-subtitle">כולל השפעת VIX ו-IV על ההחלטה</div>
+    </div>
+  </div>
+
+  <!-- VIX / IV overview -->
+  <div class="callout tip" style="margin-bottom:28px">
+    <div class="callout-icon">💡</div>
+    <div class="callout-body">
+      <div class="callout-title">לפני הכל — הבן את ה-IV וה-VIX</div>
+      <b>IV (Implied Volatility)</b> = כמה השוק מצפה שהמניה תתנדנד. IV גבוהה → פרמיות אופציות יקרות. IV נמוכה → פרמיות זולות.<br>
+      <b>VIX</b> = IV של S&P 500 בכלל. VIX &lt;20 = שקט, 20-30 = חשש, &gt;30 = פחד, &gt;40 = פאניקה.<br>
+      <b>הכלל הזהב:</b> <mark>קנה אופציות כש-IV נמוכה. מכור אופציות כש-IV גבוהה.</mark>
+    </div>
+  </div>
+
+  <!-- 4 strategies grid -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:24px 0">
+
+    <!-- BUY CALL -->
+    <div style="background:var(--bg2);border:1.5px solid rgba(0,229,160,0.35);border-radius:16px;padding:22px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+        <div style="background:rgba(0,229,160,0.15);border:1px solid rgba(0,229,160,0.3);border-radius:10px;padding:6px 14px;font-family:JetBrains Mono,monospace;font-weight:700;font-size:.85rem;color:var(--accent)">📈 קנה CALL</div>
+        <div style="font-size:.65rem;color:var(--muted);letter-spacing:1px">Long Call</div>
+      </div>
+      <p style="font-size:.88rem;margin-bottom:10px"><b>מתי לקנות CALL?</b></p>
+      <ul style="font-size:.84rem;color:var(--text2);margin-bottom:14px">
+        <li>אתה <b>בולישי</b> — צופה עלייה משמעותית במניה</li>
+        <li><b>IV נמוכה</b> (VIX &lt;18, IV של המניה נמוכה ביחס להיסטוריה) — הפרמיה זולה</li>
+        <li>יש <b>קטליזטור ברור</b> קרוב: דוח רווחים, אישור FDA, הכרזת מוצר</li>
+        <li>רוצה <b>חשיפה ממונפת</b> עם הגבלת הפסד לפרמיה בלבד</li>
+      </ul>
+      <div class="callout warn" style="margin:0;padding:12px 14px">
+        <div class="callout-icon" style="font-size:1rem">⚠️</div>
+        <div class="callout-body" style="font-size:.8rem"><b>היזהר:</b> אם IV גבוהה (לפני דוח רווחים למשל) — גם אם המניה תעלה, ה-IV Crush לאחר הדוח יכול לאכול את הרווח.</div>
+      </div>
+      <div class="example-box" style="margin-top:14px">
+        <div class="example-label">דוגמה</div>
+        <div class="example-calc">AAPL ב-$180, IV נמוכה (20%). אתה צופה עלייה לקראת מוצר חדש.<br>
+        קנית CALL $190 תמורת $3 (30 ימים).<br>
+        AAPL עולה ל-$198 → CALL שווה $8+ → <strong>+166% רווח.</strong></div>
+      </div>
+    </div>
+
+    <!-- BUY PUT -->
+    <div style="background:var(--bg2);border:1.5px solid rgba(255,95,87,0.35);border-radius:16px;padding:22px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+        <div style="background:rgba(255,95,87,0.12);border:1px solid rgba(255,95,87,0.3);border-radius:10px;padding:6px 14px;font-family:JetBrains Mono,monospace;font-weight:700;font-size:.85rem;color:var(--red)">📉 קנה PUT</div>
+        <div style="font-size:.65rem;color:var(--muted);letter-spacing:1px">Long Put</div>
+      </div>
+      <p style="font-size:.88rem;margin-bottom:10px"><b>מתי לקנות PUT?</b></p>
+      <ul style="font-size:.84rem;color:var(--text2);margin-bottom:14px">
+        <li>אתה <b>בארישי</b> — צופה ירידה במניה או בשוק</li>
+        <li><b>IV נמוכה יחסית</b> — הפרמיה לא מנופחת (VIX &lt;20 לדוגמה)</li>
+        <li>רוצה <b>גידור</b> לתיק שלך — הגנה מפני ירידה</li>
+        <li>יש <b>סיכון מזוהה</b>: חדשות שליליות צפויות, חברה בחוב גדול</li>
+      </ul>
+      <div class="callout danger" style="margin:0;padding:12px 14px">
+        <div class="callout-icon" style="font-size:1rem">🚨</div>
+        <div class="callout-body" style="font-size:.8rem"><b>שגיאה נפוצה:</b> לקנות PUT כש-VIX כבר ב-35+ — הפרמיה מנופחת מאוד. ירידת VIX בחזרה ל-20 תכחיד חלק גדול מהרווח גם אם הכיוון נכון (Vega שלילי לקונה).</div>
+      </div>
+      <div class="example-box" style="margin-top:14px">
+        <div class="example-label">דוגמה</div>
+        <div class="example-calc">VIX=16. אתה חושש מירידה בשוק.<br>
+        קנית SPY PUT $480 תמורת $4.<br>
+        SPY יורד ל-$460 → PUT שווה $20+ → <strong>+400% רווח.</strong></div>
+      </div>
+    </div>
+
+    <!-- SELL CALL -->
+    <div style="background:var(--bg2);border:1.5px solid rgba(247,201,72,0.35);border-radius:16px;padding:22px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+        <div style="background:rgba(247,201,72,0.12);border:1px solid rgba(247,201,72,0.3);border-radius:10px;padding:6px 14px;font-family:JetBrains Mono,monospace;font-weight:700;font-size:.85rem;color:var(--gold)">📤 מכור CALL</div>
+        <div style="font-size:.65rem;color:var(--muted);letter-spacing:1px">Short Call / Covered Call</div>
+      </div>
+      <p style="font-size:.88rem;margin-bottom:10px"><b>מתי למכור CALL?</b></p>
+      <ul style="font-size:.84rem;color:var(--text2);margin-bottom:14px">
+        <li><b>Covered Call:</b> יש לך מניות, אתה לא מצפה לעלייה חדה — גבה פרמיה חודשית</li>
+        <li><b>IV גבוהה</b> (VIX &gt;25) — הפרמיות שמנות, מכור ותגבה יותר</li>
+        <li>השוק <b>בצד</b> (sideways) — Theta עובד בשבילך</li>
+        <li>רוצה <b>הכנסה פסיבית</b> קבועה מהתיק</li>
+      </ul>
+      <div class="callout warn" style="margin:0;padding:12px 14px">
+        <div class="callout-icon" style="font-size:1rem">⚠️</div>
+        <div class="callout-body" style="font-size:.8rem"><b>סיכון:</b> מכירת CALL ערום (Naked) = סיכון בלתי מוגבל. תמיד עשה Covered Call (עם מניות בתיק) או גדר עם CALL נוסף.</div>
+      </div>
+      <div class="example-box" style="margin-top:14px">
+        <div class="example-label">דוגמה — Covered Call</div>
+        <div class="example-calc">יש לך 100 MSFT ב-$380. VIX=28.<br>
+        מכרת CALL $400 ל-30 ימים תמורת $5.<br>
+        MSFT נשארת ב-$385 → CALL פוקע חסר ערך → <strong>+$500 פרמיה בכיס.</strong></div>
+      </div>
+    </div>
+
+    <!-- SELL PUT -->
+    <div style="background:var(--bg2);border:1.5px solid rgba(90,171,255,0.35);border-radius:16px;padding:22px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+        <div style="background:rgba(90,171,255,0.12);border:1px solid rgba(90,171,255,0.3);border-radius:10px;padding:6px 14px;font-family:JetBrains Mono,monospace;font-weight:700;font-size:.85rem;color:var(--blue)">📥 מכור PUT</div>
+        <div style="font-size:.65rem;color:var(--muted);letter-spacing:1px">Cash-Secured Put</div>
+      </div>
+      <p style="font-size:.88rem;margin-bottom:10px"><b>מתי למכור PUT?</b></p>
+      <ul style="font-size:.84rem;color:var(--text2);margin-bottom:14px">
+        <li>אתה <b>בולישי-ניטרלי</b> — לא מצפה לירידה גדולה</li>
+        <li><b>IV גבוהה</b> (VIX &gt;25) — גבה פרמיה שמנה</li>
+        <li>אתה <b>מוכן לרכוש את המניה</b> במחיר ה-Strike אם תרד</li>
+        <li>רוצה להיכנס למניה <b>בהנחה</b> מהמחיר הנוכחי</li>
+      </ul>
+      <div class="callout info" style="margin:0;padding:12px 14px">
+        <div class="callout-icon" style="font-size:1rem">💡</div>
+        <div class="callout-body" style="font-size:.8rem"><b>Cash-Secured Put:</b> ודא שיש לך מספיק מזומן לקנות את המניה אם תתחייב. זו לא הימור — זו מחויבות לרכישה עתידית בהנחה.</div>
+      </div>
+      <div class="example-box" style="margin-top:14px">
+        <div class="example-label">דוגמה</div>
+        <div class="example-calc">NVDA ב-$900. VIX=30. אתה רוצה לקנות ב-$850.<br>
+        מכרת PUT $850 ל-30 ימים תמורת $12.<br>
+        NVDA נשארת ב-$880 → <strong>+$1,200 פרמיה.</strong><br>
+        NVDA יורדת ל-$830 → קנית ב-$850, Break-even $838.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIX Decision Table -->
+  <h3>📊 טבלת החלטה מהירה — VIX vs אסטרטגיה</h3>
+  <div class="cmp-table-wrap">
+    <table class="cmp-table">
+      <thead>
+        <tr>
+          <th>רמת VIX</th>
+          <th>מה זה אומר</th>
+          <th>✅ עדיף לעשות</th>
+          <th>❌ להימנע</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span style="color:var(--accent);font-weight:700">&lt;15</span></td>
+          <td>שקט מוחלט, שוק שאנן</td>
+          <td>קנה CALL / קנה PUT (זול)</td>
+          <td>מכור אופציות (פרמיה נמוכה מדי)</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--accent);font-weight:700">15–20</span></td>
+          <td>רגיל, שוק מאוזן</td>
+          <td>שתי הדרכים סבירות. Covered Call טוב</td>
+          <td>אין איסור מוחלט</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--gold);font-weight:700">20–30</span></td>
+          <td>חשש, תנודתיות מוגברת</td>
+          <td>מכור PUT / מכור CALL (פרמיה שמנה)</td>
+          <td>קנייה בלתי מגודרת של אופציות</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--red);font-weight:700">30–40</span></td>
+          <td>פחד, שוק בתנודה חזקה</td>
+          <td>מכור אופציות (IV Crush הולך לבוא)</td>
+          <td>קנה PUT (פרמיה מנופחת — Vega יכחיד רווח)</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--red);font-weight:700">&gt;40</span></td>
+          <td>פאניקה, Bear Market</td>
+          <td>מכור PUT עם Strike נמוך מאוד (גבה פרמיה ענקית), שקול קנה CALL זול</td>
+          <td>קנה PUT — בשלב זה כולם כבר קנו, פרמיה ענקית</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- The Greeks summary -->
+  <h3>🔢 ה-Greeks — בקצרה ובעברית</h3>
+  <div class="def-grid">
+    <div class="def-card">
+      <div class="def-term">Delta (Δ)</div>
+      <div class="def-desc">כמה האופציה זזה לכל $1 שינוי במניה. CALL = 0 עד 1. PUT = -1 עד 0. ITM = Delta גבוה.</div>
+    </div>
+    <div class="def-card">
+      <div class="def-term">Theta (Θ)</div>
+      <div class="def-desc">שחיקת זמן יומית. קונה אופציה מפסיד Theta. מוכר אופציה מרוויח Theta. מואץ ב-30 ימים לפקיעה.</div>
+    </div>
+    <div class="def-card">
+      <div class="def-term">Vega (V)</div>
+      <div class="def-desc">רגישות ל-IV. IV עולה → אופציה מתייקרת (טוב לקונה). IV יורדת → אופציה מוזלת. זה ה-IV Crush שקורה אחרי דוח.</div>
+    </div>
+    <div class="def-card">
+      <div class="def-term">Gamma (Γ)</div>
+      <div class="def-desc">קצב שינוי של Delta. גבוה קרוב לפקיעה ולמחיר השוק. אופציות ATM בפקיעה = Gamma קיצוני.</div>
+    </div>
+  </div>
+
+  <div class="callout tip">
+    <div class="callout-icon">🧠</div>
+    <div class="callout-body">
+      <div class="callout-title">חוק 30-60-30 — מתי להחזיק ומתי לצאת</div>
+      <ul style="margin:0;padding-right:18px">
+        <li>קנה אופציה עם <b>60-90 ימים</b> לפקיעה — פחות Theta Decay</li>
+        <li>סגור <b>כשהרווח 50-100%</b> — אל תחכה לפקיעה</li>
+        <li>כמוכר אופציה — צא ב-<b>50% מהפרמיה</b> שגבית (קנה חזרה בחצי מחיר)</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /chapter -->
+</div><!-- /course-wrap -->
+</div><!-- /options-guide -->
+
 </div><!-- /main-content --></div><!-- /course-outer-wrap -->
 
 <script>
@@ -972,9 +1157,10 @@ async function showCourse(user) {
     const out = new Uint8Array(total); let off=0;
     for(const c of chunks){out.set(c,off);off+=c.length;}
     document.getElementById('course-encrypted-container').innerHTML = new TextDecoder().decode(out);
+    // Show options guide section
     var og = document.getElementById('options-guide');
     if (og) og.style.display = 'block';
-    setTimeout(function(){ if(typeof examInit==='function') examInit(); repairQuizzes(); }, 200);
+    setTimeout(function(){ if(typeof examInit==='function') examInit(); }, 150);
   }
 
   function _fallback() {
@@ -1305,48 +1491,6 @@ function answer(qId,type,el){
 
 function toggleCheck(el){el.classList.toggle('done');}
 
-/* ── QUIZ REPAIR — fixes quizzes injected from encrypted content ── */
-function repairQuizzes(){
-  // Find every .quiz block in the decrypted container
-  var quizzes = document.querySelectorAll('#course-encrypted-container .quiz');
-  quizzes.forEach(function(quiz){
-    var qId = quiz.id;
-    if(!qId) return;
-    var options = quiz.querySelectorAll('.quiz-option');
-    if(!options.length) return;
-
-    options.forEach(function(opt){
-      // Clone to remove any stale event listeners, then re-attach
-      var fresh = opt.cloneNode(true);
-
-      // Determine correct/wrong from existing onclick attr or data attribute
-      var oc = opt.getAttribute('onclick') || '';
-      var isCorrect = oc.includes("'correct'") || opt.dataset.correct === '1';
-
-      // Fix styling — ensure it looks like a proper clickable option
-      fresh.style.cursor = 'pointer';
-      fresh.style.userSelect = 'none';
-      fresh.style.transition = 'all .18s';
-
-      // Re-wire onclick
-      fresh.onclick = (function(q, correct){
-        return function(){ answer(q, correct ? 'correct' : 'wrong', this); };
-      })(qId, isCorrect);
-
-      // Hover effects via mouse events
-      fresh.addEventListener('mouseenter', function(){
-        if(!quiz.dataset.answered) this.style.borderColor = 'var(--border2)';
-      });
-      fresh.addEventListener('mouseleave', function(){
-        if(!quiz.dataset.answered && !this.classList.contains('correct') && !this.classList.contains('wrong'))
-          this.style.borderColor = '';
-      });
-
-      opt.parentNode.replaceChild(fresh, opt);
-    });
-  });
-}
-
 
 /* ── EMAILJS — PURCHASE ── */
 (function(){
@@ -1500,13 +1644,38 @@ var examQD = [
   {num:25, tag:"אסטרטגיה כוללת", color:"accent",
    q:"משקיע מתחיל עם $10,000. מה האסטרטגיה הנכונה ביותר לטווח ארוך (10+ שנים)?",
    opts:["א. שים הכל ב-TSLA — צמיחה אגרסיבית","ב. DCA חודשי ב-VOO/SPY עם פיזור, ללא מינוף, עם המשך לימוד","ג. מסחר יומי — תשואות מהירות","ד. המתן לירידה של 50% לפני השקעה"], ans:1,
-   exp:"<strong>נכון!</strong> DCA קבוע ב-ETF מגוון, ללא מינוף, תוך המשך לימוד. Time in market beats timing the market."}
+   exp:"<strong>נכון!</strong> DCA קבוע ב-ETF מגוון, ללא מינוף, תוך המשך לימוד. Time in market beats timing the market.",
+   base:true},
+  /* ── שאלות בונוס — אופציות ── */
+  {num:"B1", tag:"🎯 בונוס — אופציות", color:"purple", bonus:true,
+   q:"VIX עומד על 38 (גבוה מאוד). אתה בטוח שהשוק יירד. מה האסטרטגיה הנכונה?",
+   opts:["א. קנה PUT — VIX גבוה = פרמיה יקרה, לא משתלם","ב. מכור CALL — גבה פרמיה גבוהה כנגד מחיר קנייה","ג. קנה PUT ורצוי לחכות לירידת VIX תחילה, כי עכשיו הפרמיה מנופחת","ד. VIX 38 = הזמן הכי טוב לקנות CALL"], ans:2,
+   exp:"<strong>נכון!</strong> VIX 38 = IV מנופחת. קניית PUT עכשיו = תשלום פרמיה מקסימלית. אם VIX ירד (ולו ל-25) — תפסיד בגלל Vega גם אם המניה ירדה מעט. עדיף לחכות לירידת IV, או למכור אופציות (גבה פרמיה) כשה-IV גבוה."},
+  {num:"B2", tag:"🎯 בונוס — אופציות", color:"purple", bonus:true,
+   q:"מניה ב-$100. IV נמוכה (VIX 14). אתה צופה עלייה משמעותית בחודש הקרוב. מה תעשה?",
+   opts:["א. קנה CALL — IV נמוכה = פרמיה זולה, Vega לא יפגע בך","ב. מכור PUT — לא כדאי כשה-IV נמוך","ג. קנה PUT — כדי לגדר","ד. לא לגעת באופציות כש-IV נמוך"], ans:0,
+   exp:"<strong>נכון!</strong> IV נמוכה = פרמיית CALL זולה יחסית. אם המניה תעלה — תרוויח גם מהכיוון וגם מעליית IV (Vega חיובי לקונה). זה הזמן הכי טוב לקנות אופציות!"},
+  {num:"B3", tag:"🎯 בונוס — אופציות", color:"purple", bonus:true,
+   q:"מה זה Theta Decay ולמה הוא חשוב לקונה אופציה?",
+   opts:["א. רווח יומי אוטומטי לקונה האופציה","ב. שחיקת ערך זמן יומית — האויב של קוני אופציות, הידיד של מוכרי אופציות","ג. העלייה בפרמיה כש-IV עולה","ד. ההפרש בין מחיר האופציה לערכה הפנימי"], ans:1,
+   exp:"<strong>נכון!</strong> Theta = כמה שווי האופציה יורד כל יום שעובר. ב-30 ימים לפקיעה — Theta מואץ. קונה CALL שמחזיק 3 שבועות ולא זז — מפסיד אוטומטית. מוכר אופציה גובה את ה-Theta כל יום."},
+  {num:"B4", tag:"🎯 בונוס — אופציות", color:"purple", bonus:true,
+   q:"מניה ב-$50. אתה מוכר PUT עם Strike $45 ופרמיה $2. מה יקרה אם המניה תרד ל-$41 בפקיעה?",
+   opts:["א. הרווח שלך $2 (הפרמיה)","ב. הפסד $2 בלבד","ג. הפסד $2 נטו — שקיבלת $2 פרמיה אבל מחויב לקנות ב-$45 מניה ששווה $41","ד. אין הפסד — ה-PUT נפקע חסר ערך"], ans:2,
+   exp:"<strong>נכון!</strong> מכרת PUT $45 = התחייבת לקנות ב-$45. המניה ב-$41 → המחזיק יממש. הפסד = (45−41) − 2 פרמיה = $2 נטו. Break-even = Strike − פרמיה = $43."},
+  {num:"B5", tag:"🎯 בונוס — אופציות", color:"purple", bonus:true,
+   q:"Covered Call: יש לך 100 מניות של AAPL ב-$180. מכרת CALL ב-Strike $195 ופרמיה $3 לחודש. מה הסיכון הגדול ביותר?",
+   opts:["א. AAPL עולה ל-$220 — מוכרים את המניות ב-$195 בלבד, מפסידים את העלייה מ-$195 ל-$220","ב. AAPL יורד ל-$120 — הפרמיה $3 לא מגינה מספיק","ג. אין סיכון — Covered Call תמיד בטוח","ד. AAPL לא זזה — מפסידים את הפרמיה"], ans:0,
+   exp:"<strong>נכון!</strong> ב-Covered Call הסיכון הוא Opportunity Cost — אם AAPL תפרץ ל-$220+, מכרת זכות ב-$195 בלבד. הרווח מוגבל ל-$15+$3=$18 למניה, לא משנה כמה תעלה. הסיכון כלפי מטה מוגן רק ב-$3."}
 ];
 
-var examSt = { a: new Array(25).fill(null), s: false };
+var examSt = { a: new Array(30).fill(null), s: false };
+var EXAM_BASE = 25;
+var EXAM_BONUS = 5;
+var EXAM_TOTAL = 30;
 
 function examInit() {
-  examSt.a = new Array(25).fill(null);
+  examSt.a = new Array(EXAM_TOTAL).fill(null);
   examSt.s = false;
   var c = document.getElementById('exam-all-questions');
   if (!c) return;
@@ -1519,7 +1688,7 @@ function examInit() {
   var pb = document.getElementById('exam-progress-bar');
   if (pb) pb.style.width = '0%';
   var pt = document.getElementById('exam-progress-text');
-  if (pt) pt.textContent = '0 / 25 נענו';
+  if (pt) pt.textContent = '0 / 25 נענו (+ 5 בונוס)';
   var btn = document.getElementById('exam-submit-btn');
   if (btn) {
     btn.disabled = true;
@@ -1528,12 +1697,22 @@ function examInit() {
     btn.textContent = '📊 הגש מבחן וקבל ציון';
   }
 
-  var colorBg = { accent:'rgba(0,229,160,0.12)', gold:'rgba(247,201,72,0.12)', blue:'rgba(90,171,255,0.12)' };
-  var colorTc = { accent:'var(--accent)', gold:'var(--gold)', blue:'var(--blue)' };
-  var colorBd = { accent:'rgba(0,229,160,0.25)', gold:'rgba(247,201,72,0.3)', blue:'rgba(90,171,255,0.3)' };
+  var colorBg = { accent:'rgba(0,229,160,0.12)', gold:'rgba(247,201,72,0.12)', blue:'rgba(90,171,255,0.12)', purple:'rgba(167,139,250,0.12)' };
+  var colorTc = { accent:'var(--accent)', gold:'var(--gold)', blue:'var(--blue)', purple:'var(--purple)' };
+  var colorBd = { accent:'rgba(0,229,160,0.25)', gold:'rgba(247,201,72,0.3)', blue:'rgba(90,171,255,0.3)', purple:'rgba(167,139,250,0.3)' };
 
   for (var i = 0; i < examQD.length; i++) {
     var q = examQD[i];
+
+    /* ── הפרדת בונוס ── */
+    if (q.bonus && i === EXAM_BASE) {
+      var bonusSep = document.createElement('div');
+      bonusSep.style.cssText = 'margin:32px 0 20px;padding:18px 22px;background:rgba(167,139,250,0.08);border:1.5px solid rgba(167,139,250,0.3);border-radius:14px;text-align:center';
+      bonusSep.innerHTML = '<div style="font-family:Syne,sans-serif;font-weight:800;font-size:1.1rem;color:var(--purple);margin-bottom:6px">🎯 שאלות בונוס — אופציות</div>' +
+        '<div style="font-size:.82rem;color:var(--text2)">שאלות אלו אינן חובה אבל שוות נקודות בונוס לציון הסופי. <br>גם אם לא ענית — הציון שלך לא נפגע.</div>';
+      c.appendChild(bonusSep);
+    }
+
     var card = document.createElement('div');
     card.id = 'eqc-' + i;
     card.style.background = 'var(--bg2)';
@@ -1630,14 +1809,20 @@ function examSel(qi, oi) {
       l.style.color = 'var(--text2)';
     }
   }
-  var answered = examSt.a.filter(function(x) { return x !== null; }).length;
+  /* count only base questions for submit button */
+  var baseAnswered = 0;
+  for (var b = 0; b < EXAM_BASE; b++) { if (examSt.a[b] !== null) baseAnswered++; }
+  var totalAnswered = examSt.a.filter(function(x) { return x !== null; }).length;
   var pb = document.getElementById('exam-progress-bar');
-  if (pb) pb.style.width = (answered / 25 * 100) + '%';
+  if (pb) pb.style.width = (baseAnswered / EXAM_BASE * 100) + '%';
   var pt = document.getElementById('exam-progress-text');
-  if (pt) pt.textContent = answered + ' / 25 נענו';
+  if (pt) {
+    var bonusAnswered = totalAnswered - baseAnswered;
+    pt.textContent = baseAnswered + ' / 25 נענו' + (bonusAnswered > 0 ? ' · ' + bonusAnswered + ' בונוס' : ' (+ 5 בונוס)');
+  }
   var btn = document.getElementById('exam-submit-btn');
   if (btn) {
-    var ready = answered === 25;
+    var ready = baseAnswered === EXAM_BASE;
     btn.disabled = !ready;
     btn.style.opacity = ready ? '1' : '.4';
     btn.style.pointerEvents = ready ? 'all' : 'none';
@@ -1652,6 +1837,7 @@ function examSubmitAll() {
   if (btn) { btn.disabled = true; btn.style.opacity = '.6'; btn.textContent = '✅ המבחן הוגש'; }
 
   var correct = 0;
+  var bonusCorrect = 0;
   for (var i = 0; i < examQD.length; i++) {
     var q = examQD[i];
     var chosen = examSt.a[i];
@@ -1680,26 +1866,32 @@ function examSubmitAll() {
         l.style.color = 'var(--text2)';
       }
     }
-    if (chosen === q.ans) correct++;
+    if (chosen === q.ans) {
+      if (q.bonus) bonusCorrect++;
+      else correct++;
+    }
     var expEl = document.getElementById('ee-' + i);
     if (expEl) { expEl.innerHTML = q.exp; expEl.style.display = 'block'; }
   }
 
-  var pct = Math.round(correct / 25 * 100);
-  var wrong = 25 - correct;
+  var pct = Math.round(correct / EXAM_BASE * 100);
+  /* כל תשובת בונוס נכונה מוסיפה 2 נקודות (מקסימום +10) */
+  var bonusPoints = bonusCorrect * 2;
+  var finalPct = Math.min(100, pct + bonusPoints);
+  var wrong = EXAM_BASE - correct;
   var sc = document.getElementById('exam-live-score');
-  if (sc) { sc.textContent = 'ציון: ' + pct + '%'; sc.style.display = 'block'; }
+  if (sc) { sc.textContent = 'ציון: ' + finalPct + '%' + (bonusPoints > 0 ? ' (כולל +' + bonusPoints + '% בונוס)' : ''); sc.style.display = 'block'; }
 
   var trophy, gradeText, gradeStyle, sub;
-  if (pct >= 92) {
+  if (finalPct >= 92) {
     trophy = '🏆'; gradeText = 'מצוין';
     gradeStyle = 'background:rgba(0,229,160,.18);color:var(--accent);border:1px solid rgba(0,229,160,.3)';
     sub = 'ביצוע מרשים! אתה מוכן לשוק האמיתי.';
-  } else if (pct >= 80) {
+  } else if (finalPct >= 80) {
     trophy = '🎯'; gradeText = 'טוב מאוד';
     gradeStyle = 'background:rgba(90,171,255,.15);color:var(--blue);border:1px solid rgba(90,171,255,.3)';
     sub = 'ידע מוצק. חזור על הנושאים שפספסת.';
-  } else if (pct >= 72) {
+  } else if (finalPct >= 72) {
     trophy = '✅'; gradeText = 'עובר';
     gradeStyle = 'background:rgba(247,201,72,.12);color:var(--gold);border:1px solid rgba(247,201,72,.3)';
     sub = 'עברת! כדאי לחזור על הנושאים שהוחמצו.';
@@ -1714,7 +1906,7 @@ function examSubmitAll() {
   var gb = document.getElementById('exam-grade-badge');
   if (gb) { gb.textContent = gradeText; gb.style.cssText = gradeStyle + ';display:inline-block;font-weight:800;font-size:1.2rem;padding:8px 20px;border-radius:10px;margin-bottom:12px'; }
   var stEl = document.getElementById('exam-score-text');
-  if (stEl) stEl.textContent = pct + '%';
+  if (stEl) stEl.textContent = finalPct + '%';
   var ssEl = document.getElementById('exam-score-sub');
   if (ssEl) ssEl.textContent = sub;
 
@@ -1730,9 +1922,13 @@ function examSubmitAll() {
         '<div style="font-size:.65rem;color:var(--muted);letter-spacing:1px;margin-top:2px">שגויות</div>' +
       '</div>' +
       '<div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">' +
-        '<div style="font-size:1.6rem;font-weight:800;color:var(--gold)">25</div>' +
+        '<div style="font-size:1.6rem;font-weight:800;color:var(--gold)">' + EXAM_BASE + '</div>' +
         '<div style="font-size:.65rem;color:var(--muted);letter-spacing:1px;margin-top:2px">סה"כ</div>' +
-      '</div>';
+      '</div>' +
+      (bonusCorrect > 0 ? '<div style="background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.3);border-radius:10px;padding:14px;text-align:center">' +
+        '<div style="font-size:1.6rem;font-weight:800;color:var(--purple)">+' + bonusPoints + '%</div>' +
+        '<div style="font-size:.65rem;color:var(--muted);letter-spacing:1px;margin-top:2px">בונוס אופציות</div>' +
+      '</div>' : '');
   }
 
   var resEl = document.getElementById('exam-result');
@@ -1745,6 +1941,8 @@ function examSubmitAll() {
 function examRestart() {
   var resEl = document.getElementById('exam-result');
   if (resEl) resEl.style.display = 'none';
+  examSt.a = new Array(EXAM_TOTAL).fill(null);
+  examSt.s = false;
   examInit();
   var aq = document.getElementById('exam-all-questions');
   if (aq) aq.scrollIntoView({ behavior: 'smooth', block: 'start' });
