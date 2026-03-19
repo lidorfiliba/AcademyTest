@@ -23,6 +23,7 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--bg);color:var(--text);font-family:'Heebo',sans-serif;line-height:1.75;overflow-x:hidden;}
+html{overflow-x:hidden;}
 .course-outer-wrap{}
 
 /* DISCLAIMER GATE */
@@ -330,7 +331,8 @@ mark{background:var(--accent-dim);color:var(--accent);padding:1px 6px;border-rad
 @media(min-width:481px){
   .nav-hamburger{display:none !important;}
 }
-  .course-wrap{padding:0 13px 100px;}
+@media(max-width:480px){
+  .course-wrap{padding:58px 16px 100px;}
   .chapter{padding:56px 0 36px;}
   .def-grid,.strategy-grid,.psych-grid{grid-template-columns:1fr;}
   .steps::before{display:none;}
