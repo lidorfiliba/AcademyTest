@@ -906,6 +906,131 @@ body.login-open{overflow:hidden;position:fixed;width:100%;}
     </div>
   </div>
 
+  <!-- === יסודות אופציות === -->
+  <h3>📚 יסודות — מה זה אופציה בכלל?</h3>
+  <div class="callout info" style="margin-bottom:20px">
+    <div class="callout-icon">💡</div>
+    <div class="callout-body">
+      <div class="callout-title">הגדרה פשוטה</div>
+      אופציה היא <b>חוזה</b> שנותן לך <b>זכות (לא חובה)</b> לקנות או למכור מניה במחיר מסוים (Strike) עד תאריך מסוים (פקיעה). תמורת הזכות הזו אתה משלם <b>פרמיה</b>.
+    </div>
+  </div>
+  <div class="def-grid">
+    <div class="def-card"><div class="def-term">Strike Price (מחיר מימוש)</div><div class="def-desc">המחיר שבו תוכל לקנות/למכור את המניה. נקבע מראש בחוזה. AAPL Strike $200 = זכות לקנות ב-$200 ללא קשר לשוק.</div></div>
+    <div class="def-card"><div class="def-term">Premium (פרמיה)</div><div class="def-desc">המחיר שמשלמים עבור האופציה. <mark>Premium = Intrinsic Value + Extrinsic Value</mark>. הקונה משלם, המוכר מקבל.</div></div>
+    <div class="def-card"><div class="def-term">Intrinsic Value (ערך פנימי)</div><div class="def-desc">כמה האופציה שווה "עכשיו" אם ממשים אותה היום. CALL $190 כשמניה ב-$200 = Intrinsic $10. OTM = Intrinsic = 0.</div></div>
+    <div class="def-card"><div class="def-term">Extrinsic Value (ערך חיצוני)</div><div class="def-desc">פרמיה מעבר לערך הפנימי. כולל ערך זמן + IV. יורד עם הזמן (Theta Decay). בפקיעה = 0 תמיד.</div></div>
+    <div class="def-card"><div class="def-term">ITM — In The Money</div><div class="def-desc">CALL: מחיר מניה &gt; Strike. PUT: מחיר מניה &lt; Strike. יש Intrinsic Value. יקרה יותר, Delta גבוה.</div></div>
+    <div class="def-card"><div class="def-term">OTM — Out of The Money</div><div class="def-desc">CALL: מחיר מניה &lt; Strike. PUT: מחיר מניה &gt; Strike. רק Extrinsic Value. זולה, מסוכנת יותר — סיכוי פקיעה חסרת ערך גבוה.</div></div>
+    <div class="def-card"><div class="def-term">ATM — At The Money</div><div class="def-desc">מחיר המניה ≈ Strike. Gamma הכי גבוה. Delta≈0.5. הכי רגישה לתנועה. Theta מואץ כאן בשבוע האחרון.</div></div>
+    <div class="def-card"><div class="def-term">Expiration / פקיעה</div><div class="def-desc">התאריך האחרון לממש. בפקיעה — Extrinsic = 0. OTM = אפס לחלוטין. סוגים: Weekly / Monthly / LEAPS (שנה+).</div></div>
+    <div class="def-card"><div class="def-term">Break-Even</div><div class="def-desc">CALL: Strike + פרמיה. PUT: Strike − פרמיה. CALL $200 עם פרמיה $5 = צריך מניה מעל $205 כדי להרוויח.</div></div>
+    <div class="def-card"><div class="def-term">Leverage (מינוף)</div><div class="def-desc">אופציה 1 = 100 מניות. פרמיה $3 = $300 לחוזה. מניה עולה $10 — האופציה יכולה לעלות $500-$900. מינוף 3x-10x.</div></div>
+  </div>
+
+  <!-- === שרשרת האופציות === -->
+  <h3>📋 שרשרת האופציות (Option Chain) — איך לקרוא?</h3>
+  <div class="callout tip" style="margin-bottom:14px">
+    <div class="callout-icon">👁️</div>
+    <div class="callout-body"><div class="callout-title">Option Chain = מחירון האופציות</div>הטבלה בפלטפורמה שמציגה את כל האופציות הזמינות. כך קוראים אותה:</div>
+  </div>
+  <div class="cmp-table-wrap" style="margin-bottom:16px">
+    <table class="cmp-table">
+      <thead><tr><th>עמודה</th><th>הסבר</th><th>דוגמה</th></tr></thead>
+      <tbody>
+        <tr><td><b>Strike</b></td><td>מחיר המימוש — הלב של האופציה</td><td>$195, $200, $205</td></tr>
+        <tr><td><b>Bid</b></td><td>המחיר שהשוק מוכן לשלם כקונה</td><td>$3.50</td></tr>
+        <tr><td><b>Ask</b></td><td>המחיר שמוכרים דורשים</td><td>$3.70</td></tr>
+        <tr><td><b>Volume</b></td><td>כמה חוזים נסחרו היום — נזילות</td><td>2,450</td></tr>
+        <tr><td><b>Open Interest</b></td><td>כמה חוזים פתוחים כרגע בשוק</td><td>18,300</td></tr>
+        <tr><td><b>IV%</b></td><td>Implied Volatility של אופציה ספציפית</td><td>42%</td></tr>
+        <tr><td><b>Delta</b></td><td>רגישות לשינוי מחיר המניה (0-1 ל-CALL)</td><td>0.45</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout warn">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-body"><div class="callout-title">כלל זהב — נזילות קודמת לכל!</div><b>Open Interest &lt; 100 = אל תיכנס!</b> Bid-Ask Spread רחב = אתה מפסיד בכניסה ובצאיה. תמיד בדוק OI ו-Volume לפני כל עסקה.</div>
+  </div>
+
+  <!-- === מונחים מתקדמים === -->
+  <h3>⚙️ מונחים קריטיים נוספים</h3>
+  <div class="def-grid">
+    <div class="def-card"><div class="def-term">Exercise (מימוש)</div><div class="def-desc">הפעלת הזכות — לקנות/למכור את המניה בפועל. רוב הסוחרים לא ממשים — פשוט מוכרים את האופציה לפני פקיעה.</div></div>
+    <div class="def-card"><div class="def-term">Assignment (הסמה)</div><div class="def-desc">כשמוכר אופציה ומממשים אותו — חייב לבצע. מוכר CALL = חייב למכור מניות. מוכר PUT = חייב לקנות. תמיד Cache-Secured!</div></div>
+    <div class="def-card"><div class="def-term">Rolling (גלגול)</div><div class="def-desc">סגירת פוזיציה + פתיחה חדשה עם Strike/תאריך שונה. Covered CALL שמניה עולה → גלגל ל-Strike גבוה יותר.</div></div>
+    <div class="def-card"><div class="def-term">IV Rank / IV Percentile</div><div class="def-desc">IV עכשיו ביחס ל-52 שבועות אחרונים. IV Rank=80 = IV גבוהה ביחס להיסטוריה → עדיף למכור. IV Rank=20 → עדיף לקנות.</div></div>
+    <div class="def-card"><div class="def-term">IV Crush</div><div class="def-desc">ירידה חדה ב-IV אחרי אירוע (דוח, FDA). גם אם הכיוון נכון — IV Crush יאכל את הרווח. הסיבה לא לקנות CALL/PUT לפני דוח עם IV גבוהה.</div></div>
+    <div class="def-card"><div class="def-term">Max Loss / Max Gain</div><div class="def-desc">קונה CALL: הפסד = פרמיה. רווח = בלתי מוגבל. מוכר CALL ערום: רווח = פרמיה. הפסד = ♾️ ⚠️. מוכר CALL Covered: הפסד מוגבל.</div></div>
+  </div>
+
+  <!-- === אסטרטגיות מתקדמות === -->
+  <h3>🚀 אסטרטגיות מתקדמות</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin:16px 0">
+    <div style="background:var(--bg2);border:1.5px solid rgba(0,229,160,0.3);border-radius:14px;padding:18px">
+      <div style="font-family:JetBrains Mono,monospace;font-weight:700;font-size:.82rem;color:var(--accent);margin-bottom:10px">📈 Bull Call Spread</div>
+      <p style="font-size:.84rem;margin-bottom:8px">קנה CALL נמוך + מכור CALL גבוה. בולישי עם עלות מופחתת וסיכון מוגבל.</p>
+      <div style="font-size:.78rem;color:var(--text2)"><b>Max Gain:</b> הפרש Strikes − פרמיה נטו &nbsp;|&nbsp; <b>Max Loss:</b> פרמיה נטו ששולמה</div>
+      <div class="example-box" style="margin-top:10px;padding:10px"><div class="example-label">דוגמה</div><div class="example-calc" style="font-size:.78rem">AAPL $200. קנה CALL $200 ב-$6, מכור CALL $210 ב-$2. עלות: $4. Max Gain: $6 אם AAPL > $210.</div></div>
+    </div>
+    <div style="background:var(--bg2);border:1.5px solid rgba(255,95,87,0.3);border-radius:14px;padding:18px">
+      <div style="font-family:JetBrains Mono,monospace;font-weight:700;font-size:.82rem;color:var(--red);margin-bottom:10px">📉 Bear Put Spread</div>
+      <p style="font-size:.84rem;margin-bottom:8px">קנה PUT גבוה + מכור PUT נמוך. בארישי עם סיכון מוגבל ועלות מופחתת.</p>
+      <div style="font-size:.78rem;color:var(--text2)"><b>Max Gain:</b> הפרש Strikes − פרמיה &nbsp;|&nbsp; <b>Max Loss:</b> פרמיה שולמה</div>
+      <div class="example-box" style="margin-top:10px;padding:10px"><div class="example-label">דוגמה</div><div class="example-calc" style="font-size:.78rem">SPY $480. קנה PUT $480 ב-$5, מכור PUT $470 ב-$2. עלות: $3. מרוויח $7 אם SPY &lt; $470.</div></div>
+    </div>
+    <div style="background:var(--bg2);border:1.5px solid rgba(167,139,250,0.3);border-radius:14px;padding:18px">
+      <div style="font-family:JetBrains Mono,monospace;font-weight:700;font-size:.82rem;color:var(--purple);margin-bottom:10px">🔄 Long Straddle</div>
+      <p style="font-size:.84rem;margin-bottom:8px">קנה CALL + קנה PUT באותו Strike. מרוויח מתנועה <b>גדולה בכל כיוון</b>. מצוין לפני דוח עם IV נמוכה.</p>
+      <div style="font-size:.78rem;color:var(--text2)"><b>מרוויח:</b> כשהמניה זזה יותר מהפרמיה הכוללת</div>
+      <div class="example-box" style="margin-top:10px;padding:10px"><div class="example-label">דוגמה</div><div class="example-calc" style="font-size:.78rem">NVDA לפני דוח. CALL $800 ב-$15 + PUT $800 ב-$14 = $29. מרוויח אם NVDA זזה &gt;$29.</div></div>
+    </div>
+    <div style="background:var(--bg2);border:1.5px solid rgba(90,171,255,0.3);border-radius:14px;padding:18px">
+      <div style="font-family:JetBrains Mono,monospace;font-weight:700;font-size:.82rem;color:var(--blue);margin-bottom:10px">🔀 Short Strangle</div>
+      <p style="font-size:.84rem;margin-bottom:8px">מכור CALL OTM + מכור PUT OTM. גובה פרמיה כשהשוק שקט. מתאים כש-IV גבוהה.</p>
+      <div style="font-size:.78rem;color:var(--text2)"><b>Max Gain:</b> שתי הפרמיות &nbsp;|&nbsp; <b>Max Loss:</b> בלתי מוגבל ⚠️ מתקדמים בלבד</div>
+      <div class="example-box" style="margin-top:10px;padding:10px"><div class="example-label">דוגמה</div><div class="example-calc" style="font-size:.78rem">VIX=35. מכור CALL $220 ב-$4 + PUT $180 ב-$3 = $700 פרמיה. מרוויח אם מניה נשארת $173–$227.</div></div>
+    </div>
+    <div style="background:var(--bg2);border:1.5px solid rgba(247,201,72,0.35);border-radius:14px;padding:18px">
+      <div style="font-family:JetBrains Mono,monospace;font-weight:700;font-size:.82rem;color:var(--gold);margin-bottom:10px">🦅 Iron Condor</div>
+      <p style="font-size:.84rem;margin-bottom:8px">Bull Put Spread + Bear Call Spread. מרוויח כשהמניה נשארת בטווח. סיכון מוגבל!</p>
+      <div style="font-size:.78rem;color:var(--text2)"><b>Max Gain:</b> פרמיה נטו &nbsp;|&nbsp; <b>Max Loss:</b> הפרש Strikes − פרמיה (ידוע מראש)</div>
+      <div class="example-box" style="margin-top:10px;padding:10px"><div class="example-label">דוגמה</div><div class="example-calc" style="font-size:.78rem">SPY $480. מכור PUT $470 + קנה PUT $460 + מכור CALL $490 + קנה CALL $500. גביית $2.50.</div></div>
+    </div>
+    <div style="background:var(--bg2);border:1.5px solid rgba(0,229,160,0.2);border-radius:14px;padding:18px">
+      <div style="font-family:JetBrains Mono,monospace;font-weight:700;font-size:.82rem;color:var(--accent);margin-bottom:10px">🛡️ Collar (גידור)</div>
+      <p style="font-size:.84rem;margin-bottom:8px">יש לך מניה + קנה PUT + מכור CALL. מגן מלמטה, מגביל מלמעלה. כמעט ללא עלות.</p>
+      <div style="font-size:.78rem;color:var(--text2)">מתאים לתיק גדול שרוצים להגן עליו לתקופה.</div>
+      <div class="example-box" style="margin-top:10px;padding:10px"><div class="example-label">דוגמה</div><div class="example-calc" style="font-size:.78rem">100 MSFT ב-$400. קנה PUT $380 ב-$5, מכור CALL $420 ב-$5. עלות: $0. מוגן $380–$420.</div></div>
+    </div>
+  </div>
+
+  <!-- === מסלול למתחילים === -->
+  <h3>🗺️ המסלול המומלץ — מאפס לעסקה ראשונה</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">פתח חשבון דמו עם אופציות</div><div class="step-desc">Tastytrade, TD Ameritrade (thinkorswim Paper), Interactive Brokers. תרגל לפחות חודש ללא כסף אמיתי.</div></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">למד לקרוא Option Chain</div><div class="step-desc">פתח שרשרת של AAPL/SPY. זהה ITM/OTM/ATM. בדוק Open Interest ו-Volume לפני כל בחירת Strike.</div></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">התחל עם Covered Call בלבד</div><div class="step-desc">אם יש לך מניות — מכור CALL OTM. אסטרטגיה בטוחה, מגבלת סיכון, לומד את המנגנון.</div></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-content"><div class="step-title">Cash-Secured Put לכניסה חכמה</div><div class="step-desc">רוצה לקנות מניה? מכור PUT במחיר הרצוי. קיבלת פרמיה + נכנסת בהנחה אם מומש.</div></div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-content"><div class="step-title">Vertical Spreads לשלב הבא</div><div class="step-desc">Bull Call Spread / Bear Put Spread. סיכון מוגבל + עלות נמוכה = הצעד הנכון אחרי הבסיס.</div></div></div>
+    <div class="step"><div class="step-num">6</div><div class="step-content"><div class="step-title">נזילות בלבד — SPY/QQQ/AAPL/NVDA</div><div class="step-desc">Open Interest &gt; 1,000 בכל עסקה. Bid-Ask Spread פחות מ-$0.10. אחרת — אתה כבר מפסיד בכניסה.</div></div></div>
+  </div>
+
+  <!-- === 10 טעויות נפוצות === -->
+  <h3>🚫 10 הטעויות הנפוצות ביותר — שמרו על הכסף שלכם</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:10px;margin:14px 0">
+    <div style="background:var(--bg2);border:1px solid rgba(255,95,87,0.25);border-radius:12px;padding:14px"><div style="font-size:.68rem;color:var(--red);font-weight:700;margin-bottom:5px">❌ טעות #1</div><div style="font-size:.86rem;font-weight:600;margin-bottom:3px">קנייה לפני דוח עם IV גבוהה</div><div style="font-size:.78rem;color:var(--text2)">IV Crush אחרי הדוח יהרוס את הפרמיה גם אם הכיוון נכון.</div></div>
+    <div style="background:var(--bg2);border:1px solid rgba(255,95,87,0.25);border-radius:12px;padding:14px"><div style="font-size:.68rem;color:var(--red);font-weight:700;margin-bottom:5px">❌ טעות #2</div><div style="font-size:.86rem;font-weight:600;margin-bottom:3px">OTM זולות שפוקעות בשבוע</div><div style="font-size:.78rem;color:var(--text2)">זה לוטו, לא מסחר. Theta הורג אותן מהר.</div></div>
+    <div style="background:var(--bg2);border:1px solid rgba(255,95,87,0.25);border-radius:12px;padding:14px"><div style="font-size:.68rem;color:var(--red);font-weight:700;margin-bottom:5px">❌ טעות #3</div><div style="font-size:.86rem;font-weight:600;margin-bottom:3px">מכירת CALL ערום (Naked)</div><div style="font-size:.78rem;color:var(--text2)">הפסד בלתי מוגבל. Covered Call בלבד למתחילים.</div></div>
+    <div style="background:var(--bg2);border:1px solid rgba(255,95,87,0.25);border-radius:12px;padding:14px"><div style="font-size:.68rem;color:var(--red);font-weight:700;margin-bottom:5px">❌ טעות #4</div><div style="font-size:.86rem;font-weight:600;margin-bottom:3px">התעלמות מ-Open Interest</div><div style="font-size:.78rem;color:var(--text2)">OI=50 = לא תוכל לצאת בלי לשלם מחיר גבוה.</div></div>
+    <div style="background:var(--bg2);border:1px solid rgba(255,95,87,0.25);border-radius:12px;padding:14px"><div style="font-size:.68rem;color:var(--red);font-weight:700;margin-bottom:5px">❌ טעות #5</div><div style="font-size:.86rem;font-weight:600;margin-bottom:3px">החזקה עד פקיעה תמיד</div><div style="font-size:.78rem;color:var(--text2)">סגור ברווח 50-75%. אל תחמד. מניה יכולה לחזור.</div></div>
+    <div style="background:var(--bg2);border:1px solid rgba(255,95,87,0.25);border-radius:12px;padding:14px"><div style="font-size:.68rem;color:var(--red);font-weight:700;margin-bottom:5px">❌ טעות #6</div><div style="font-size:.86rem;font-weight:600;margin-bottom:3px">פוזיציה גדולה מדי</div><div style="font-size:.78rem;color:var(--text2)">Max 2-5% מהתיק לאופציה בודדת. אופציה = 100 מניות.</div></div>
+    <div style="background:var(--bg2);border:1px solid rgba(255,95,87,0.25);border-radius:12px;padding:14px"><div style="font-size:.68rem;color:var(--red);font-weight:700;margin-bottom:5px">❌ טעות #7</div><div style="font-size:.86rem;font-weight:600;margin-bottom:3px">Skip של IV Rank</div><div style="font-size:.78rem;color:var(--text2)">IV=40% על TSLA = נמוכה. IV=40% על JNJ = גבוהה. תמיד השווה להיסטוריה.</div></div>
+    <div style="background:var(--bg2);border:1px solid rgba(255,95,87,0.25);border-radius:12px;padding:14px"><div style="font-size:.68rem;color:var(--red);font-weight:700;margin-bottom:5px">❌ טעות #8</div><div style="font-size:.86rem;font-weight:600;margin-bottom:3px">לא להבין Assignment</div><div style="font-size:.78rem;color:var(--text2)">מכרת PUT ללא מזומן? תקבל 100 מניות שלא ביקשת. תמיד Cache-Secured.</div></div>
+    <div style="background:var(--bg2);border:1px solid rgba(255,95,87,0.25);border-radius:12px;padding:14px"><div style="font-size:.68rem;color:var(--red);font-weight:700;margin-bottom:5px">❌ טעות #9</div><div style="font-size:.86rem;font-weight:600;margin-bottom:3px">מסחר במניות קטנות</div><div style="font-size:.78rem;color:var(--text2)">Spread רחב + OI נמוך + מניפולציה. SPY/QQQ/AAPL בלבד בהתחלה.</div></div>
+    <div style="background:var(--bg2);border:1px solid rgba(255,95,87,0.25);border-radius:12px;padding:14px"><div style="font-size:.68rem;color:var(--red);font-weight:700;margin-bottom:5px">❌ טעות #10</div><div style="font-size:.86rem;font-weight:600;margin-bottom:3px">Skip על הדמו</div><div style="font-size:.78rem;color:var(--text2)">כולם דוחים דמו. כולם מפסידים כסף אמיתי בהתחלה. הדמו הוא הכי זול.</div></div>
+  </div>
+
   <!-- VIX Decision Table -->
   <h3>📊 טבלת החלטה מהירה — VIX vs אסטרטגיה</h3>
   <div class="cmp-table-wrap">
@@ -954,23 +1079,129 @@ body.login-open{overflow:hidden;position:fixed;width:100%;}
   </div>
 
   <!-- The Greeks summary -->
-  <h3>🔢 ה-Greeks — בקצרה ובעברית</h3>
+  <h3>🔢 ה-Greeks — המדריך המלא</h3>
+  <div class="callout info" style="margin-bottom:16px">
+    <div class="callout-icon">🧮</div>
+    <div class="callout-body"><div class="callout-title">מה זה Greeks?</div>מדדים מתמטיים שמתארים כיצד מחיר האופציה משתנה בתגובה לגורמים שונים. אלה הכלים שכל סוחר מקצועי צריך להכיר.</div>
+  </div>
   <div class="def-grid">
     <div class="def-card">
       <div class="def-term">Delta (Δ)</div>
-      <div class="def-desc">כמה האופציה זזה לכל $1 שינוי במניה. CALL = 0 עד 1. PUT = -1 עד 0. ITM = Delta גבוה.</div>
-    </div>
-    <div class="def-card">
-      <div class="def-term">Theta (Θ)</div>
-      <div class="def-desc">שחיקת זמן יומית. קונה אופציה מפסיד Theta. מוכר אופציה מרוויח Theta. מואץ ב-30 ימים לפקיעה.</div>
-    </div>
-    <div class="def-card">
-      <div class="def-term">Vega (V)</div>
-      <div class="def-desc">רגישות ל-IV. IV עולה → אופציה מתייקרת (טוב לקונה). IV יורדת → אופציה מוזלת. זה ה-IV Crush שקורה אחרי דוח.</div>
+      <div class="def-desc"><b>מה:</b> כמה האופציה זזה לכל $1 שינוי במניה. CALL = 0 עד 1. PUT = -1 עד 0.<br><b>שימוש:</b> Delta 0.5 = אופציה עולה $0.50 על כל $1 עלייה. ITM = Delta גבוה, OTM = נמוך. Delta = הסתברות גסה ל-ITM בפקיעה.</div>
     </div>
     <div class="def-card">
       <div class="def-term">Gamma (Γ)</div>
-      <div class="def-desc">קצב שינוי של Delta. גבוה קרוב לפקיעה ולמחיר השוק. אופציות ATM בפקיעה = Gamma קיצוני.</div>
+      <div class="def-desc"><b>מה:</b> קצב שינוי של Delta לכל $1 תנועה.<br><b>שימוש:</b> Gamma גבוה = Delta משתנה מהר — הכי גבוה ATM קרוב לפקיעה. GEX (Gamma Exposure) מסביר למה השוק "נתקע" ליד Strikes ספציפיים. Gamma Risk קריטי בסוף שבוע.</div>
+    </div>
+    <div class="def-card">
+      <div class="def-term">Theta (Θ)</div>
+      <div class="def-desc"><b>מה:</b> כמה הפרמיה יורדת כל יום — שחיקת זמן.<br><b>שימוש:</b> קונה מפסיד Theta כל יום. מוכר מרוויח אותו. מואץ ב-30 ימים לפקיעה ומכפיל ב-7 הימים האחרונים. "Theta decay is exponential, not linear."</div>
+    </div>
+    <div class="def-card">
+      <div class="def-term">Vega (V)</div>
+      <div class="def-desc"><b>מה:</b> רגישות לשינוי ב-IV — כמה הפרמיה משתנה על כל 1% שינוי ב-IV.<br><b>שימוש:</b> IV עולה = אופציה מתייקרת (קונה מרוויח). IV יורדת = IV Crush. LEAPS = Vega גבוה מאוד. שבועיות = Vega נמוך.</div>
+    </div>
+    <div class="def-card">
+      <div class="def-term">Rho (ρ)</div>
+      <div class="def-desc"><b>מה:</b> רגישות לשינוי בריבית — כמה הפרמיה משתנה על כל 1% שינוי בריבית הבנק המרכזי.<br><b>שימוש:</b> Rho חשוב ב-LEAPS ואופציות ארוכות טווח. ריבית עולה = CALL מתייקר קלות, PUT מוזל. פחות קריטי לאופציות קצרות.</div>
+    </div>
+    <div class="def-card">
+      <div class="def-term">Charm (Delta Decay)</div>
+      <div class="def-desc"><b>מה:</b> קצב שינוי של Delta עם הזמן — כמה Delta יורד ביום.<br><b>שימוש:</b> OTM CALL שמחזיקים שבוע — Charm יוריד את ה-Delta גם בלי תנועה. קריטי בהחלטות Rolling.</div>
+    </div>
+  </div>
+
+  <!-- IV Skew -->
+  <h3>📉 IV Skew ו-Volatility Smile</h3>
+  <div class="callout tip" style="margin-bottom:14px">
+    <div class="callout-icon">📊</div>
+    <div class="callout-body">
+      <div class="callout-title">למה IV לא זהה לכל Strike?</div>
+      באופן תיאורטי IV צריכה להיות זהה לכל Strike. בפועל — היא לא. זה נקרא IV Skew, ויש לו שתי צורות עיקריות.
+    </div>
+  </div>
+  <div class="cmp-table-wrap" style="margin-bottom:16px">
+    <table class="cmp-table">
+      <thead><tr><th>סוג Skew</th><th>מה זה</th><th>איפה נראה</th><th>משמעות</th></tr></thead>
+      <tbody>
+        <tr><td><b>Negative Skew (Smirk)</b></td><td>IV של PUT גבוהה מ-CALL באותו מרחק מ-ATM</td><td>מניות / מדדים (SPX, SPY)</td><td>השוק "מפחד" יותר מירידות. ביטוח מפני קריסה = יקר יותר.</td></tr>
+        <tr><td><b>Positive Skew</b></td><td>IV של CALL גבוהה מ-PUT</td><td>סחורות, Crypto</td><td>ציפייה לעלייה חדה. CALL ביטוח מספיק = יקר יותר.</td></tr>
+        <tr><td><b>Volatility Smile</b></td><td>IV גבוהה בשני הצדדים, נמוכה ב-ATM</td><td>מט"ח (Forex)</td><td>שוק מצפה לתנועה חזקה בכל כיוון.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="example-box">
+    <div class="example-label">שימוש מעשי ב-Skew</div>
+    <div class="example-calc">PUT $380 על SPY שנסחר ב-$480 = IV גבוהה יותר מ-CALL $580.<br>זה אומר: <strong>מכירת PUT = גביית פרמיה גבוהה יותר</strong> ממה שתיאוריה מצביעה.<br>ולכן: Covered Put ו-Cash-Secured Put הם אסטרטגיות שמנצלות את ה-Skew.</div>
+  </div>
+
+  <!-- Wheel + PMCC + Earnings -->
+  <h3>⭐ אסטרטגיות פרו — הגלגל, PMCC ו-Earnings Play</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin:14px 0">
+    <div style="background:var(--bg2);border:2px solid rgba(0,229,160,0.4);border-radius:14px;padding:20px">
+      <div style="font-size:.75rem;color:var(--accent);font-weight:800;letter-spacing:1.5px;margin-bottom:8px">⭐ הפופולרית ביותר</div>
+      <div style="font-family:JetBrains Mono,monospace;font-weight:700;font-size:.9rem;color:var(--accent);margin-bottom:10px">🎡 Wheel Strategy</div>
+      <p style="font-size:.84rem;margin-bottom:10px">מחזור אסטרטגיות: <b>Cash-Secured PUT → אחזקת מניות → Covered CALL → חזור לPUT</b>. יצירת הכנסה פסיבית קבועה.</p>
+      <div style="font-size:.78rem;color:var(--text2);margin-bottom:10px">
+        <b>שלב 1:</b> מכור PUT ← גובה פרמיה<br>
+        <b>שלב 2:</b> אם מומש → קנית מניות בהנחה<br>
+        <b>שלב 3:</b> מכור Covered CALL ← פרמיה נוספת<br>
+        <b>שלב 4:</b> אם CALL מומש → מכרת מניות ברווח → חזרה לשלב 1
+      </div>
+      <div class="example-box" style="margin:0;padding:10px"><div class="example-label">תשואה ריאלית</div><div class="example-calc" style="font-size:.78rem">SPY $480. מכור PUT $475 = $2/חודש. אם לא מומש = $24/שנה על $475 ≈ 5% תשואה נוספת על המניה.</div></div>
+    </div>
+    <div style="background:var(--bg2);border:1.5px solid rgba(167,139,250,0.3);border-radius:14px;padding:20px">
+      <div style="font-family:JetBrains Mono,monospace;font-weight:700;font-size:.9rem;color:var(--purple);margin-bottom:10px">💎 PMCC — Poor Man's Covered Call</div>
+      <p style="font-size:.84rem;margin-bottom:10px">במקום לקנות 100 מניות ב-$48,000 — קנה LEAPS CALL ITM + מכור CALL חודשי OTM. אותה אסטרטגיה, עלות פחות מ-10%.</p>
+      <div style="font-size:.78rem;color:var(--text2);margin-bottom:10px">
+        <b>קנה:</b> LEAPS CALL (12-18 חודשים, Delta > 0.7)<br>
+        <b>מכור:</b> CALL חודשי OTM<br>
+        <b>יתרון:</b> הכנסה חודשית ממינוף נמוך<br>
+        <b>סיכון:</b> LEAPS יכול לפוג חסר ערך אם מניה יורדת
+      </div>
+      <div class="example-box" style="margin:0;padding:10px"><div class="example-label">דוגמה</div><div class="example-calc" style="font-size:.78rem">AAPL $200. קנה LEAPS CALL $170 (18 חודש) ב-$38. מכור CALL $210 חודשי ב-$2. תשואה חודשית על השקעה.</div></div>
+    </div>
+    <div style="background:var(--bg2);border:1.5px solid rgba(247,201,72,0.3);border-radius:14px;padding:20px">
+      <div style="font-family:JetBrains Mono,monospace;font-weight:700;font-size:.9rem;color:var(--gold);margin-bottom:10px">📣 Earnings Play — מסחר סביב דוחות</div>
+      <p style="font-size:.84rem;margin-bottom:10px">דוחות = IV פיק → IV Crush. שתי גישות מנוגדות לפי הכיוון שאתה מאמין.</p>
+      <div style="font-size:.78rem;color:var(--text2);margin-bottom:10px">
+        <b>לפני דוח (IV גבוהה):</b><br>
+        → מכור Straddle/Strangle = גבה IV Crush<br>
+        → מכור Iron Condor = הכנסה מ-IV ירידה<br><br>
+        <b>אחרי דוח (IV נמוכה):</b><br>
+        → קנה CALL/PUT אם יש המשך תנועה צפוי<br>
+        → IV נמוכה = פרמיה זולה
+      </div>
+      <div class="example-box" style="margin:0;padding:10px"><div class="example-label">כלל הזהב</div><div class="example-calc" style="font-size:.78rem">בדוק Expected Move: פרמיה CALL ATM + פרמיה PUT ATM ≈ כמה השוק מצפה שהמניה תזוז. אם הזזת בפועל > Expected = קנייה הייתה משתלמת.</div></div>
+    </div>
+    <div style="background:var(--bg2);border:1.5px solid rgba(90,171,255,0.3);border-radius:14px;padding:20px">
+      <div style="font-family:JetBrains Mono,monospace;font-weight:700;font-size:.9rem;color:var(--blue);margin-bottom:10px">📅 Calendar Spread</div>
+      <p style="font-size:.84rem;margin-bottom:10px">מכור אופציה קצרת טווח + קנה אותו Strike ארוך טווח. מרוויח מ-Theta Decay של הקצרה מהר מהארוכה.</p>
+      <div style="font-size:.78rem;color:var(--text2);margin-bottom:10px">
+        <b>מרוויח כשמניה זזה מעט</b><br>
+        <b>מרוויח אם IV עולה</b> (Vega חיובי)<br>
+        <b>הפסד:</b> אם מניה זזה חזק בכל כיוון
+      </div>
+      <div class="example-box" style="margin:0;padding:10px"><div class="example-label">דוגמה</div><div class="example-calc" style="font-size:.78rem">SPY $480. מכור CALL $480 שבועי ב-$2, קנה CALL $480 חודשי ב-$5. עלות $3. מרוויח אם SPY ≈ $480 בסוף שבוע.</div></div>
+    </div>
+    <div style="background:var(--bg2);border:1.5px solid rgba(255,95,87,0.25);border-radius:14px;padding:20px">
+      <div style="font-family:JetBrains Mono,monospace;font-weight:700;font-size:.9rem;color:var(--red);margin-bottom:10px">⚡ Pin Risk — הסיכון הנסתר</div>
+      <p style="font-size:.84rem;margin-bottom:10px">כשמניה נסגרת <b>בדיוק</b> ליד ה-Strike בפקיעה — אין ודאות אם מימשו אותך. זה Pin Risk.</p>
+      <div style="font-size:.78rem;color:var(--text2);margin-bottom:10px">
+        <b>דוגמה:</b> מכרת CALL $200. AAPL נסגרת ב-$200.02.<br>
+        ייתכן שיממשו אותך → תמכור 100 מניות שאין לך (Short!).<br>
+        ייתכן שלא יממשו → אתה בסדר.<br><br>
+        <b>פתרון:</b> סגור פוזיציות שמוכרות לפני שעה 3:30 ביום הפקיעה.
+      </div>
+    </div>
+    <div style="background:var(--bg2);border:1.5px solid rgba(0,229,160,0.2);border-radius:14px;padding:20px">
+      <div style="font-family:JetBrains Mono,monospace;font-weight:700;font-size:.9rem;color:var(--accent);margin-bottom:10px">📐 Delta Hedging</div>
+      <p style="font-size:.84rem;margin-bottom:10px">שמירה על תיק "ניטרלי לשוק" ע"י איזון Deltas. Market Makers עושים זאת כל הזמן.</p>
+      <div style="font-size:.78rem;color:var(--text2);margin-bottom:10px">
+        <b>דוגמה:</b> מכרת CALL Delta 0.4 (על 100 מניות = Delta -40).<br>
+        לנטרל: קנה 40 מניות (+40 Delta) → Delta ≈ 0.<br><br>
+        <b>שימוש:</b> Portfolio Hedging, Market Neutral strategies.
+      </div>
     </div>
   </div>
 
@@ -984,6 +1215,87 @@ body.login-open{overflow:hidden;position:fixed;width:100%;}
         <li>כמוכר אופציה — צא ב-<b>50% מהפרמיה</b> שגבית (קנה חזרה בחצי מחיר)</li>
       </ul>
     </div>
+  </div>
+
+  <!-- בחן את עצמך -->
+  <h3 style="margin-top:36px">🎯 בחן את עצמך — אופציות</h3>
+
+  <div class="quiz" id="oq1">
+    <div class="quiz-title">🎯 שאלה 1</div>
+    <div class="quiz-q">VIX עומד על 38. אתה בטוח שהשוק יירד. מה האסטרטגיה הנכונה?</div>
+    <div class="quiz-options">
+      <div class="quiz-option" onclick="answer('oq1','wrong',this)"><div class="quiz-opt-letter">א</div>קנה PUT — הכיוון חשוב, לא ה-IV</div>
+      <div class="quiz-option" onclick="answer('oq1','wrong',this)"><div class="quiz-opt-letter">ב</div>קנה CALL — השוק תמיד מתאושש</div>
+      <div class="quiz-option" onclick="answer('oq1','correct',this)"><div class="quiz-opt-letter">ג</div>מכור אופציות / חכה לירידת VIX — IV מנופחת, Vega יאכל את הרווח</div>
+      <div class="quiz-option" onclick="answer('oq1','wrong',this)"><div class="quiz-opt-letter">ד</div>VIX 38 = הזמן הכי טוב לקנות CALL</div>
+    </div>
+    <div class="quiz-explain" id="oq1-explain">✅ נכון! VIX 38 = IV מנופחת. קניית PUT = תשלום פרמיה מקסימלית. אם VIX ירד — Vega שלילי יאכל רווח גם אם הכיוון נכון. עדיף למכור אופציות כשה-IV גבוהה.</div>
+  </div>
+  <div class="quiz" id="oq2">
+    <div class="quiz-title">🎯 שאלה 2</div>
+    <div class="quiz-q">AAPL ב-$200. קנית CALL Strike $200, פרמיה $5. מהו ה-Break-Even ומה קורה אם AAPL ב-$203 בפקיעה?</div>
+    <div class="quiz-options">
+      <div class="quiz-option" onclick="answer('oq2','wrong',this)"><div class="quiz-opt-letter">א</div>Break-Even $200. רווח $3</div>
+      <div class="quiz-option" onclick="answer('oq2','correct',this)"><div class="quiz-opt-letter">ב</div>Break-Even $205. הפסד $2 (האופציה שווה $3, שילמת $5)</div>
+      <div class="quiz-option" onclick="answer('oq2','wrong',this)"><div class="quiz-opt-letter">ג</div>Break-Even $195. רווח $8</div>
+      <div class="quiz-option" onclick="answer('oq2','wrong',this)"><div class="quiz-opt-letter">ד</div>Break-Even $205. רווח $3</div>
+    </div>
+    <div class="quiz-explain" id="oq2-explain">✅ נכון! Break-Even = Strike + פרמיה = $200 + $5 = $205. ב-$203 האופציה שווה $3 (ITM $3), אבל שילמת $5 → הפסד $2. צריך AAPL > $205 כדי להרוויח.</div>
+  </div>
+  <div class="quiz" id="oq3">
+    <div class="quiz-title">🎯 שאלה 3</div>
+    <div class="quiz-q">מה ההבדל בין ITM ל-OTM בהקשר של CALL?</div>
+    <div class="quiz-options">
+      <div class="quiz-option" onclick="answer('oq3','wrong',this)"><div class="quiz-opt-letter">א</div>ITM = אופציה זולה. OTM = אופציה יקרה</div>
+      <div class="quiz-option" onclick="answer('oq3','correct',this)"><div class="quiz-opt-letter">ב</div>ITM = מחיר מניה > Strike (יש Intrinsic Value). OTM = מחיר מניה &lt; Strike (רק Extrinsic)</div>
+      <div class="quiz-option" onclick="answer('oq3','wrong',this)"><div class="quiz-opt-letter">ג</div>ITM = מחיר מניה &lt; Strike. OTM = מחיר מניה > Strike</div>
+      <div class="quiz-option" onclick="answer('oq3','wrong',this)"><div class="quiz-opt-letter">ד</div>OTM = אופציה עם Delta גבוה. ITM = Delta נמוך</div>
+    </div>
+    <div class="quiz-explain" id="oq3-explain">✅ נכון! CALL ITM = מחיר מניה > Strike, יש ערך פנימי. CALL OTM = מחיר מניה &lt; Strike, רק ערך זמן. OTM זולה יותר אבל עם סיכוי גבוה יותר לפקוע חסרת ערך.</div>
+  </div>
+  <div class="quiz" id="oq4">
+    <div class="quiz-title">🎯 שאלה 4</div>
+    <div class="quiz-q">מה זה Theta Decay ולמה הוא מואץ ב-30 הימים האחרונים?</div>
+    <div class="quiz-options">
+      <div class="quiz-option" onclick="answer('oq4','wrong',this)"><div class="quiz-opt-letter">א</div>רווח יומי אוטומטי לקונה האופציה</div>
+      <div class="quiz-option" onclick="answer('oq4','correct',this)"><div class="quiz-opt-letter">ב</div>שחיקת ערך זמן יומית — מואצת לקראת פקיעה כי Extrinsic Value מתכווץ מהר יותר</div>
+      <div class="quiz-option" onclick="answer('oq4','wrong',this)"><div class="quiz-opt-letter">ג</div>עלייה ב-IV לפני פקיעה</div>
+      <div class="quiz-option" onclick="answer('oq4','wrong',this)"><div class="quiz-opt-letter">ד</div>שינוי ב-Delta לפי מחיר המניה</div>
+    </div>
+    <div class="quiz-explain" id="oq4-explain">✅ נכון! Theta = כמה ערך האופציה יורד ביום. ב-30 ימים לפקיעה — Extrinsic Value חייב לרדת ל-0 בזמן קצר יותר → Theta יומי גדל. קונה מפסיד, מוכר מרוויח.</div>
+  </div>
+  <div class="quiz" id="oq5">
+    <div class="quiz-title">🎯 שאלה 5</div>
+    <div class="quiz-q">בדיקת Option Chain: Open Interest=45, Volume=3. האם כדאי להיכנס לאופציה הזו?</div>
+    <div class="quiz-options">
+      <div class="quiz-option" onclick="answer('oq5','wrong',this)"><div class="quiz-opt-letter">א</div>כן — Volume נמוך = שקט ובטוח</div>
+      <div class="quiz-option" onclick="answer('oq5','wrong',this)"><div class="quiz-opt-letter">ב</div>כן אם הכיוון נכון</div>
+      <div class="quiz-option" onclick="answer('oq5','correct',this)"><div class="quiz-opt-letter">ג</div>לא! OI=45 = לא נזיל. Bid-Ask Spread רחב = תפסיד בכניסה וביציאה</div>
+      <div class="quiz-option" onclick="answer('oq5','wrong',this)"><div class="quiz-opt-letter">ד</div>תלוי בפרמיה</div>
+    </div>
+    <div class="quiz-explain" id="oq5-explain">✅ נכון! Open Interest &lt; 100 = אופציה לא נזילה. Bid-Ask Spread יכול להיות $0.50+ = הפסד מיידי של $50 לחוזה. תמיד OI > 500 לפחות, עדיף >1,000.</div>
+  </div>
+  <div class="quiz" id="oq6">
+    <div class="quiz-title">🎯 שאלה 6</div>
+    <div class="quiz-q">מה זה Iron Condor ומתי להשתמש בו?</div>
+    <div class="quiz-options">
+      <div class="quiz-option" onclick="answer('oq6','wrong',this)"><div class="quiz-opt-letter">א</div>קנה CALL + קנה PUT — כשמצפים לתנועה גדולה</div>
+      <div class="quiz-option" onclick="answer('oq6','correct',this)"><div class="quiz-opt-letter">ב</div>Bull Put Spread + Bear Call Spread — מרוויח כשמניה נשארת בטווח, סיכון מוגבל</div>
+      <div class="quiz-option" onclick="answer('oq6','wrong',this)"><div class="quiz-opt-letter">ג</div>מכירת CALL ערום — כשמצפים לירידה</div>
+      <div class="quiz-option" onclick="answer('oq6','wrong',this)"><div class="quiz-opt-letter">ד</div>קנה מניה + מכור PUT — להכנסה פסיבית</div>
+    </div>
+    <div class="quiz-explain" id="oq6-explain">✅ נכון! Iron Condor = 4 רגליים. Max Gain = פרמיה נטו. Max Loss ידוע מראש. מתאים כש-IV גבוהה ואתה מצפה שהמניה תישאר בטווח — שקט יחסי בשוק.</div>
+  </div>
+  <div class="quiz" id="oq7">
+    <div class="quiz-title">🎯 שאלה 7</div>
+    <div class="quiz-q">מכרת PUT Strike $150 על מניה שנסחרת ב-$160. המניה ירדה ל-$140 בפקיעה ולא היה לך מזומן בחשבון. מה קורה?</div>
+    <div class="quiz-options">
+      <div class="quiz-option" onclick="answer('oq7','wrong',this)"><div class="quiz-opt-letter">א</div>העסקה מתבטלת אוטומטית</div>
+      <div class="quiz-option" onclick="answer('oq7','wrong',this)"><div class="quiz-opt-letter">ב</div>הפסד $10 בלבד (160-150)</div>
+      <div class="quiz-option" onclick="answer('oq7','correct',this)"><div class="quiz-opt-letter">ג</div>Assignment! הברוקר קונה עבורך 100 מניות ב-$150 — חוב של $15,000 בחשבון</div>
+      <div class="quiz-option" onclick="answer('oq7','wrong',this)"><div class="quiz-opt-letter">ד</div>הברוקר מוכר את האופציה אוטומטית</div>
+    </div>
+    <div class="quiz-explain" id="oq7-explain">✅ נכון! כששמוכרים PUT ומממשים אותו — אתה חייב לקנות 100 מניות ב-Strike. זה נקרא Assignment. בלי מזומן → חשבון במינוס. תמיד מכור PUT רק אם יש לך מזומן מספיק (Cash-Secured)!</div>
   </div>
 
 </div><!-- /chapter -->
@@ -1668,13 +1980,35 @@ var examQD = [
   {num:"B5", tag:"🎯 בונוס — אופציות", color:"purple", bonus:true,
    q:"Covered Call: יש לך 100 מניות של AAPL ב-$180. מכרת CALL ב-Strike $195 ופרמיה $3 לחודש. מה הסיכון הגדול ביותר?",
    opts:["א. AAPL עולה ל-$220 — מוכרים את המניות ב-$195 בלבד, מפסידים את העלייה מ-$195 ל-$220","ב. AAPL יורד ל-$120 — הפרמיה $3 לא מגינה מספיק","ג. אין סיכון — Covered Call תמיד בטוח","ד. AAPL לא זזה — מפסידים את הפרמיה"], ans:0,
-   exp:"<strong>נכון!</strong> ב-Covered Call הסיכון הוא Opportunity Cost — אם AAPL תפרץ ל-$220+, מכרת זכות ב-$195 בלבד. הרווח מוגבל ל-$15+$3=$18 למניה, לא משנה כמה תעלה. הסיכון כלפי מטה מוגן רק ב-$3."}
+   exp:"<strong>נכון!</strong> ב-Covered Call הסיכון הוא Opportunity Cost — אם AAPL תפרץ ל-$220+, מכרת זכות ב-$195 בלבד. הרווח מוגבל ל-$15+$3=$18 למניה, לא משנה כמה תעלה. הסיכון כלפי מטה מוגן רק ב-$3."},
+  /* ── שאלות בונוס — מאקרו כלכלי ── */
+  {num:"B6", tag:"🌍 בונוס — מאקרו", color:"blue", bonus:true,
+   q:"ה-Fed מעלה ריבית מ-2% ל-5%. מה ההשפעה הצפויה הישירה על שוק המניות?",
+   opts:["א. שוק המניות יעלה — ריבית גבוהה = כלכלה חזקה","ב. ירידה בשוק המניות — הון עובר לאג\"ח, עלות מימון עולה לחברות, מכפילים יורדים","ג. אין השפעה — המניות ואגחים שוקים נפרדים","ד. ירידה רק במניות טכנולוגיה, שאר השוק עולה"], ans:1,
+   exp:"<strong>נכון!</strong> ריבית גבוהה פוגעת במניות ב-3 מסלולים: (1) הון זורם לאג\"ח בטוחות, (2) עלות מימון לחברות עולה → רווחים יורדים, (3) DCF — ריבית גבוהה = ערך עתידי נמוך יותר → מכפילים מתכווצים. GROWTH STOCKS נפגעות יותר."},
+  {num:"B7", tag:"🌍 בונוס — מאקרו", color:"blue", bonus:true,
+   q:"CPI שנתי עלה ל-6.5%. ה-Fed צפוי להגיב בהעלאת ריבית. מה משמעות זה למשקיע באגח?",
+   opts:["א. מחיר האג\"ח הקיים יעלה — הריבית מגינה מאינפלציה","ב. מחיר האג\"ח הקיים יירד — ריבית עולה = Yield עולה = Bond Price יורד","ג. אג\"ח לא מושפע מהריבית","ד. רק אג\"ח ממשלתי יירד, קונצרני לא"], ans:1,
+   exp:"<strong>נכון!</strong> קשר הפוך קלאסי: כשריבית עולה → Yield חדשות עולה → אג\"ח ישנות שמשלמות פחות נמכרות בהנחה → מחירן יורד. Duration גבוה = רגישות גבוהה יותר. TLT (20yr Treasury) מגיב בחדות לשינויי ריבית."},
+  {num:"B8", tag:"🌍 בונוס — מאקרו", color:"blue", bonus:true,
+   q:"NFP (Non-Farm Payrolls) חזק מאוד — 350K משרות חדשות לעומת צפי 180K. מה הסיכון מבחינת שוק?",
+   opts:["א. חיובי לחלוטין — כלכלה חזקה = מניות עולות","ב. עלול להיות שלילי — שוק חם = Fed ימשיך להעלות ריבית = איום על מניות","ג. אין קשר בין תעסוקה לשוק המניות","ד. NFP רק רלוונטי לאג\"ח, לא למניות"], ans:1,
+   exp:"<strong>נכון!</strong> זו הפרדוקסליות של 'Good News = Bad News' — תעסוקה חזקה מרמזת על כלכלה שורדת, מה שאומר שה-Fed לא ימהר להוריד ריבית (או יעלה אותה). שוק לרוב יגיב בירידה אם הנתון רחוק מהצפי כלפי מעלה."},
+  /* ── שאלות בונוס — אופציות מתקדמות ── */
+  {num:"B9", tag:"🎯 בונוס — אופציות", color:"purple", bonus:true,
+   q:"מה ההבדל בין Long Straddle ל-Short Strangle, ומתי משתמשים בכל אחד?",
+   opts:["א. שניהם זהים — קנייה ומכירה של CALL בלבד","ב. Straddle = קנייה לפני תנועה גדולה (IV נמוכה). Strangle = מכירה כשמצפים לשקט (IV גבוהה)","ג. Straddle = OTM, Strangle = ATM","ד. Strangle זול יותר ותמיד עדיף"], ans:1,
+   exp:"<strong>נכון!</strong> Long Straddle — קנה CALL+PUT באותו Strike, מרוויח אם המניה זזה חזק לכל כיוון. מתאים לפני דוח כשIV נמוכה. Short Strangle — מכור CALL OTM + PUT OTM, מרוויח אם המניה נשארת שקטה. מתאים כש-IV גבוהה."},
+  {num:"B10", tag:"🎯 בונוס — אופציות", color:"purple", bonus:true,
+   q:"מה זה IV Crush ומתי הוא קורה?",
+   opts:["א. עלייה חדה ב-IV לפני אירוע גדול","ב. ירידה חדה ב-IV מיד אחרי אירוע (דוח/FDA/בחירות) — גם אם הכיוון נכון, הפרמיה מתמוטטת","ג. מצב שבו הגמא עולה לפני פקיעה","ד. כשה-Delta מתאפס בפקיעה"], ans:1,
+   exp:"<strong>נכון!</strong> לפני דוח — IV מנופחת (כולם קונים ביטוח). אחרי הדוח — האי-וודאות נפתרה → IV קורסת. דוגמה: קנית CALL לפני AAPL Earnings עם IV=85%. אחרי דוח (ירד 3%) → IV=35%. הCAll ירד בגלל IV Crush למרות שהכיוון היה נכון."}
 ];
 
-var examSt = { a: new Array(30).fill(null), s: false };
+var examSt = { a: new Array(35).fill(null), s: false };
 var EXAM_BASE = 25;
-var EXAM_BONUS = 5;
-var EXAM_TOTAL = 30;
+var EXAM_BONUS = 10;
+var EXAM_TOTAL = 35;
 
 function examInit() {
   examSt.a = new Array(EXAM_TOTAL).fill(null);
@@ -1710,8 +2044,8 @@ function examInit() {
     if (q.bonus && i === EXAM_BASE) {
       var bonusSep = document.createElement('div');
       bonusSep.style.cssText = 'margin:32px 0 20px;padding:18px 22px;background:rgba(167,139,250,0.08);border:1.5px solid rgba(167,139,250,0.3);border-radius:14px;text-align:center';
-      bonusSep.innerHTML = '<div style="font-family:Syne,sans-serif;font-weight:800;font-size:1.1rem;color:var(--purple);margin-bottom:6px">🎯 שאלות בונוס — אופציות</div>' +
-        '<div style="font-size:.82rem;color:var(--text2)">שאלות אלו אינן חובה אבל שוות נקודות בונוס לציון הסופי. <br>גם אם לא ענית — הציון שלך לא נפגע.</div>';
+      bonusSep.innerHTML = '<div style="font-family:Syne,sans-serif;font-weight:800;font-size:1.1rem;color:var(--purple);margin-bottom:6px">🎯 שאלות בונוס — אופציות ומאקרו</div>' +
+        '<div style="font-size:.82rem;color:var(--text2)">שאלות אלו אינן חובה אבל שוות נקודות בונוס לציון הסופי. <br>5 שאלות אופציות + 3 שאלות מאקרו + 2 שאלות אופציות מתקדמות.<br>גם אם לא ענית — הציון שלך לא נפגע.</div>';
       c.appendChild(bonusSep);
     }
 
