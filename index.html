@@ -80,7 +80,7 @@ html{overflow-x:hidden;}
 
 /* Dropdown panel */
 .nav-dropdown{position:absolute;top:calc(100% + 8px);right:0;min-width:200px;background:rgba(8,10,20,0.98);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:6px;box-shadow:0 16px 48px rgba(0,0,0,0.6);opacity:0;transform:translateY(-6px) scale(0.97);pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:600;}
-.nav-group:hover .nav-dropdown,.nav-group.open .nav-dropdown{opacity:1;transform:translateY(0) scale(1);pointer-events:all;}
+.nav-group.open .nav-dropdown{opacity:1;transform:translateY(0) scale(1);pointer-events:all;}
 
 .nav-item{display:flex;align-items:center;gap:10px;width:100%;padding:9px 12px;border-radius:8px;border:none;background:transparent;cursor:pointer;font-family:'Heebo',sans-serif;font-size:.78rem;color:var(--text2);text-align:right;transition:all .15s;white-space:nowrap;}
 .nav-item:hover{background:rgba(255,255,255,0.07);color:var(--text);}
@@ -325,11 +325,11 @@ mark{background:var(--accent-dim);color:var(--accent);padding:1px 6px;border-rad
 }
 
 /* Hamburger for mobile/tablet */
-@media(max-width:768px){
+@media(max-width:900px){
   .nav-groups{display:none !important;}
   .nav-hamburger{display:flex !important;}
 }
-@media(min-width:769px){
+@media(min-width:901px){
   .nav-hamburger{display:none !important;}
 }
 @media(max-width:480px){
@@ -1132,11 +1132,11 @@ async function showCourse(user) {
   document.body.classList.remove('login-open');
   const mc = document.getElementById('main-content');
   mc.style.display = 'block';
-  // Show nav and mobile drawer
+  // Show nav (drawer stays hidden until hamburger click)
   const navEl = document.getElementById('main-course-nav');
   if(navEl) navEl.style.display = 'flex';
   const drawerEl = document.getElementById('mobileDrawer');
-  if(drawerEl) drawerEl.style.display = '';
+  if(drawerEl) { drawerEl.style.display = 'block'; drawerEl.classList.remove('open'); }
   // Show loading state while fetching key
   document.getElementById('course-encrypted-container').innerHTML =
     '<div style="display:flex;align-items:center;justify-content:center;height:60vh;flex-direction:column;gap:16px">' +
