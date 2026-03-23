@@ -22,8 +22,8 @@
   --purple:#a78bfa;--purple-dim:rgba(167,139,250,0.12);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);color:var(--text);font-family:'Heebo',sans-serif;line-height:1.75;overflow-x:hidden;}
-html{overflow-x:hidden;}
+body{background:var(--bg);color:var(--text);font-family:'Heebo',sans-serif;line-height:1.75;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;}
+html{overflow-x:hidden;scroll-behavior:auto;overscroll-behavior-y:none;}
 .course-outer-wrap{}
 
 /* DISCLAIMER GATE */
@@ -103,7 +103,7 @@ html{overflow-x:hidden;}
 .mobile-drawer{position:fixed;top:58px;left:0;right:0;bottom:0;z-index:499;transform:translateX(100%);transition:transform .25s cubic-bezier(.4,0,.2,1);}
 .mobile-drawer.open{transform:translateX(0);}
 .mobile-drawer-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);}
-.mobile-drawer-panel{position:absolute;top:0;right:0;width:280px;height:100%;background:rgba(8,10,20,0.99);border-left:1px solid rgba(255,255,255,0.08);padding:16px 12px;overflow-y:auto;display:flex;flex-direction:column;gap:4px;}
+.mobile-drawer-panel{position:absolute;top:0;right:0;width:280px;height:100%;background:rgba(8,10,20,0.99);border-left:1px solid rgba(255,255,255,0.08);padding:16px 12px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;display:flex;flex-direction:column;gap:4px;}
 .drawer-section-title{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.25);font-weight:700;padding:10px 10px 4px;margin-top:4px;}
 .drawer-item{display:flex;align-items:center;gap:10px;width:100%;padding:11px 12px;border-radius:9px;border:none;background:transparent;cursor:pointer;font-family:'Heebo',sans-serif;font-size:.82rem;color:var(--text2);text-align:right;transition:all .15s;}
 .drawer-item:hover{background:rgba(255,255,255,0.07);color:var(--text);}
@@ -357,7 +357,7 @@ mark{background:var(--accent-dim);color:var(--accent);padding:1px 6px;border-rad
 #login-gate{position:fixed;inset:0;z-index:99998;background:var(--bg);display:flex;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;}
 #login-gate.hidden{display:none;}
 .login-card{background:var(--bg2);border:1px solid var(--border2);border-radius:20px;padding:40px 32px;max-width:420px;width:100%;text-align:center;position:relative;z-index:1;margin:auto;}
-body.login-open{overflow:hidden;position:fixed;width:100%;}
+body.login-open{overflow:hidden;}
 .login-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.6rem;color:var(--accent);margin-bottom:4px;}
 .login-sub{font-size:.68rem;color:var(--muted);letter-spacing:2px;margin-bottom:28px;}
 .login-tabs{display:flex;gap:4px;background:var(--surface);border-radius:9px;padding:3px;margin-bottom:24px;}
@@ -1186,11 +1186,17 @@ if(sessionStorage.getItem('disc_ok')==='1'){
 }
 
 // Progress bar
+let _rafPending=false;
 window.addEventListener('scroll',()=>{
-  const doc=document.documentElement;
-  const pct=(doc.scrollTop/(doc.scrollHeight-doc.clientHeight))*100;
-  document.getElementById('progressBar').style.width=Math.min(pct,100)+'%';
-});
+  if(_rafPending)return;
+  _rafPending=true;
+  requestAnimationFrame(()=>{
+    const doc=document.documentElement;
+    const pct=(doc.scrollTop/(doc.scrollHeight-doc.clientHeight))*100;
+    document.getElementById('progressBar').style.width=Math.min(pct,100)+'%';
+    _rafPending=false;
+  });
+},{passive:true});
 
 // Intersection Observer
 const obs=new IntersectionObserver(entries=>{
@@ -1212,7 +1218,12 @@ function toggleDrawer(){
   const isOpen=d.classList.contains('open');
   d.classList.toggle('open');
   b.textContent=isOpen?'☰':'✕';
-  document.body.style.overflow=isOpen?'':'hidden';
+  if(!isOpen){
+    document.body.style.overflow='hidden';
+  } else {
+    document.body.style.overflow='';
+    document.body.style.position='';
+  }
 }
 function closeDrawer(){
   const d=document.getElementById('mobileDrawer');
@@ -1220,6 +1231,7 @@ function closeDrawer(){
   d.classList.remove('open');
   b.textContent='☰';
   document.body.style.overflow='';
+  document.body.style.position='';
 }
 function drawerGo(id){
   closeDrawer();
