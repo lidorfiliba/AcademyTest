@@ -579,7 +579,7 @@ function setValTab(tab) {
     b.classList.toggle('active', ['pe','dcf','compare'][i] === tab);
   });
   document.getElementById('val-'+tab+'-tab').style.display = 'block';
-  if(tab==='compare') drawCompareChart();
+  if(tab==='compare') setTimeout(function(){ drawCompareChart(); }, 50);
 }
 
 function calcValuation() {
@@ -604,12 +604,19 @@ function calcValuation() {
 
   const currentPE = (price / eps).toFixed(2);
   const fairPrice = Math.round(eps * sectorPE);
-  const peg = (currentPE / Math.max(growth, 0.1)).toFixed(2);
+  // PEG = P/E ÷ annual growth% (standard formula: growth expressed as %, e.g. 15 not 0.15)
+  // When growth <= 0, PEG is not meaningful
+  const pegRaw = growth > 0 ? (parseFloat(currentPE) / growth) : null;
+  const peg = pegRaw !== null ? pegRaw.toFixed(2) : 'N/A';
   const upside = (((fairPrice - price) / price) * 100).toFixed(1);
 
   document.getElementById('val-current-pe').textContent = currentPE;
   document.getElementById('val-peg').textContent = peg;
-  document.getElementById('val-peg').style.color = peg < 1 ? '#00e5a0' : peg < 2 ? '#f7c948' : '#ff5f57';
+  if(pegRaw === null) {
+    document.getElementById('val-peg').style.color = '#c8c8d8';
+  } else {
+    document.getElementById('val-peg').style.color = pegRaw < 1 ? '#00e5a0' : pegRaw < 2 ? '#f7c948' : '#ff5f57';
+  }
   document.getElementById('val-sector-fair').textContent = '$'+fairPrice;
   document.getElementById('val-fair-price').textContent = '$'+fairPrice;
   document.getElementById('val-fair-price').style.color = upside > 0 ? '#00e5a0' : '#ff5f57';
@@ -623,9 +630,11 @@ function calcValuation() {
   else verdict = '🔴 <b>יקרה!</b> המחיר גבוה מהשווי ההוגן לפי הענף.';
   document.getElementById('val-verdict').innerHTML = verdict;
 
-  const tip = peg < 1 ?
+  const tip = pegRaw === null ?
+    '⚠️ צמיחה שלילית — PEG אינו רלוונטי כשהצמיחה שלילית. חשוב לבדוק את הסיבות לירידה.' :
+    pegRaw < 1 ?
     '✅ PEG < 1 — המניה זולה יחסית לצמיחה שלה. זה אחד המדדים הכי אהובים על ווארן באפט!' :
-    peg < 2 ? '📊 PEG בטווח הסביר. מניות עם PEG מתחת ל-1 נחשבות לעיתים קרובות ל"זולות".' :
+    pegRaw < 2 ? '📊 PEG בטווח הסביר. מניות עם PEG מתחת ל-1 נחשבות לעיתים קרובות ל"זולות".' :
     '⚠️ PEG גבוה — אתה משלם הרבה על כל יחידת צמיחה. חשוב לבדוק שהצמיחה תמשיך.';
   document.getElementById('val-tip').innerHTML = tip;
 }
@@ -721,10 +730,13 @@ function drawCompareChart() {
   ctx.textAlign = 'start';
 }
 
-canvas && document.getElementById('val-compare-canvas').addEventListener('click', function(e) {
-  const rect = this.getBoundingClientRect();
+// Register click handler for compare chart - use event delegation since canvas may not exist yet
+document.addEventListener('click', function(e) {
+  const canvas = document.getElementById('val-compare-canvas');
+  if(!canvas || e.target !== canvas) return;
+  const rect = canvas.getBoundingClientRect();
   const x = e.clientX - rect.left;
-  const w = this.offsetWidth;
+  const w = canvas.offsetWidth;
   const bw = (w - 60) / compareData.length;
   const idx = Math.floor((x - 30) / bw);
   if(idx >= 0 && idx < compareData.length) {
