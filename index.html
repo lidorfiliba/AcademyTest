@@ -2095,14 +2095,11 @@ async function showCourse(user) {
   }
 
   function _fallback() {
-    _decryptAndShow('StockLens2024SecureKey_LidorFiliba_AllRightsReserved')
-      .catch(e => {
-        document.getElementById('course-encrypted-container').innerHTML =
-          '<div style="color:#ff5f57;text-align:center;padding:40px;font-family:Heebo;font-size:1rem">' +
-          '⚠️ שגיאה בטעינת הקורס<br><br>' +
-          '<button onclick="location.reload()" style="background:#00e5a0;color:#000;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-family:Heebo">🔄 נסה שוב</button>' +
-          '</div>';
-      });
+    document.getElementById('course-encrypted-container').innerHTML =
+      '<div style="color:#ff5f57;text-align:center;padding:40px;font-family:Heebo;font-size:1rem">' +
+      '⚠️ שגיאה בטעינת הקורס<br><br>' +
+      '<button onclick="location.reload()" style="background:#00e5a0;color:#000;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-family:Heebo">🔄 נסה שוב</button>' +
+      '</div>';
   }
 
   // Fetch key from Edge Function with 5 second timeout
