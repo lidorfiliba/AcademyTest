@@ -22,7 +22,7 @@
   --purple:#a78bfa;--purple-dim:rgba(167,139,250,0.12);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);color:var(--text);font-family:'Heebo',sans-serif;line-height:1.75;overflow-x:hidden;-webkit-overflow-scrolling:touch;}
+body{background:var(--bg);color:var(--text);font-family:'Heebo',sans-serif;line-height:1.75;overflow-x:hidden;}
 html{overflow-x:hidden;}
 .course-outer-wrap{}
 
@@ -952,6 +952,8 @@ async function doLogin() {
 async function showCourse(user) {
   document.getElementById('login-gate').classList.add('hidden');
   document.body.classList.remove('login-open');
+  document.body.style.overflow = '';
+  document.body.style.position = '';
   const mc = document.getElementById('main-content');
   mc.style.display = 'block';
   // Show nav (drawer stays hidden until hamburger click)
