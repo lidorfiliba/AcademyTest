@@ -2479,7 +2479,13 @@ function toggleGroup(id){
   document.querySelectorAll('.nav-group-btn').forEach(x=>x.classList.remove('open'));
   if(!isOpen){
     g.classList.add('open');
-    g.querySelector('.nav-group-btn').classList.add('open');
+    const btn=g.querySelector('.nav-group-btn');
+    btn.classList.add('open');
+    const dd=g.querySelector('.nav-dropdown');
+    const rect=btn.getBoundingClientRect();
+    dd.style.top=(rect.bottom+6)+'px';
+    dd.style.right=(window.innerWidth-rect.right)+'px';
+    dd.style.left='auto';
   }
 }
 function navGo(id,groupId){
