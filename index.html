@@ -562,6 +562,36 @@ body.login-open{overflow:hidden;}
     grid-template-columns: repeat(2, 1fr) !important;
   }
 }
+
+/* ═══════════════════════════════════════════════
+   FONT SCALE FIX — make all rem sizes smaller on desktop
+   Setting font-size on #main-content scales all rem values
+   ═══════════════════════════════════════════════ */
+
+@media (min-width: 1024px) {
+  /* Scale down all content text on desktop */
+  body.course-active #main-content {
+    font-size: 14px !important;
+  }
+  /* This makes 1rem = 14px inside course content
+     So .88rem = 12.3px, .82rem = 11.5px etc — same as mobile feel */
+
+  /* Chapter titles use clamp so they stay proportional */
+  body.course-active .chapter-title {
+    font-size: clamp(1.2rem, 2vw, 1.65rem) !important;
+  }
+
+  /* Nav text stays normal size */
+  body.course-active .course-nav {
+    font-size: 14px !important;
+  }
+}
+
+@media (min-width: 1440px) {
+  body.course-active #main-content {
+    font-size: 14.5px !important;
+  }
+}
 </style>
 <script id="sla-modules-js">
 // StockLens Academy — Interactive Module JS (v3 — fixed)
