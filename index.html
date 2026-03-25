@@ -397,9 +397,9 @@ body.login-open{overflow:hidden;}
 .admin-user-inactive{background:rgba(0,229,160,0.1);color:var(--accent);border:1px solid rgba(0,229,160,0.25);}
 
 /* USER MENU */
-.user-menu-btn{position:fixed;bottom:20px;left:20px;z-index:200;background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:8px 14px;font-family:'Heebo',sans-serif;font-size:.72rem;color:var(--text2);cursor:pointer;display:none;align-items:center;gap:8px;transition:all .2s;width:auto;max-width:180px;white-space:nowrap;}
+.user-menu-btn{position:fixed;bottom:70px;left:20px;z-index:200;background:var(--bg2);border:1px solid var(--border2);border-radius:100px;padding:8px 16px;font-family:'Heebo',sans-serif;font-size:.72rem;color:var(--text2);cursor:pointer;display:none;align-items:center;gap:8px;transition:all .2s;}
 .user-menu-btn:hover{border-color:var(--accent);color:var(--accent);}
-.user-menu-btn.visible{display:inline-flex;}
+.user-menu-btn.visible{display:flex;}
 
 
 /* ── ACADEMY PURCHASE TAB ── */
@@ -3329,7 +3329,9 @@ function simGoDrawer(id){
   setTimeout(function(){ simGo(id); },220);
 }
 </script>
-<style>
+</body>
+</html>
+
 /* DESKTOP — scoped to body.course-active only */
 @media (min-width: 1024px) {
   body.course-active .course-nav {
@@ -3404,20 +3406,13 @@ function simGoDrawer(id){
     border-right: 3px solid var(--accent) !important;
   }
   body.course-active #user-menu-btn {
-    position: static !important;
     margin-top: auto !important;
     width: 100% !important;
-    max-width: 100% !important;
     padding: 14px 16px !important;
     border-radius: 0 !important;
     border-top: 1px solid var(--border) !important;
     font-size: 0.8rem !important;
     flex-shrink: 0 !important;
-    display: none !important;
-    white-space: nowrap !important;
-  }
-  body.course-active #user-menu-btn.visible {
-    display: flex !important;
   }
   body.course-active #hamburgerBtn { display: none !important; }
   body.course-active #mobileDrawer { display: none !important; }
@@ -3446,6 +3441,3 @@ function simGoDrawer(id){
   body.course-active .chapter-title { font-size: 1.95rem !important; }
 }
 
-</style>
-</body>
-</html>
