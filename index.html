@@ -461,221 +461,6 @@ body.login-open{overflow:hidden;}
 .nav-sims-item .sim-icon{font-size:.9rem;width:20px;text-align:center;}
 .nav-sims-item .sim-label{flex:1;}
 .nav-sims-item .sim-chapter{font-size:.65rem;color:rgba(255,255,255,0.25);}
-
-
-/* ═══════════════════════════════════════════════
-   DESKTOP LAYOUT — min-width: 1024px
-   Nav = <nav class="course-nav" id="main-course-nav">
-   Groups = .nav-groups / .nav-group / .nav-dropdown
-   Content = #main-content > .course-wrap
-   ═══════════════════════════════════════════════ */
-
-@media (min-width: 1024px) {
-
-  /* ── BASE FONT SCALE UP ── */
-  html { font-size: 16.5px; }
-
-  /* ── TOP HORIZONTAL NAV → VERTICAL SIDEBAR ── */
-  .course-nav {
-    /* Change from horizontal top bar to vertical left sidebar */
-    flex-direction: column !important;
-    align-items: stretch !important;
-    justify-content: flex-start !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: auto !important;
-    width: 248px !important;
-    height: 100vh !important;
-    padding: 0 !important;
-    border-bottom: none !important;
-    border-left: 1px solid var(--border) !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    gap: 0 !important;
-  }
-
-  /* Logo in sidebar — full width header */
-  .nav-logo {
-    padding: 20px 20px 14px !important;
-    font-size: 1rem !important;
-    border-bottom: 1px solid var(--border) !important;
-    width: 100% !important;
-    flex-shrink: 0 !important;
-  }
-
-  /* Nav groups become vertical list */
-  .nav-groups {
-    flex-direction: column !important;
-    align-items: stretch !important;
-    justify-content: flex-start !important;
-    margin: 8px 0 0 0 !important;
-    gap: 0 !important;
-    flex: 1 !important;
-    overflow: visible !important;
-    width: 100% !important;
-  }
-
-  .nav-group {
-    position: relative !important;
-    width: 100% !important;
-  }
-
-  /* Group buttons — full width in sidebar */
-  .nav-group-btn {
-    width: 100% !important;
-    padding: 10px 16px !important;
-    font-size: 0.78rem !important;
-    border-radius: 0 !important;
-    justify-content: space-between !important;
-    border-bottom: 1px solid rgba(255,255,255,0.04) !important;
-  }
-
-  /* Dropdown becomes inline (not floating) */
-  .nav-dropdown {
-    position: static !important;
-    opacity: 1 !important;
-    transform: none !important;
-    background: rgba(0,0,0,0.25) !important;
-    border: none !important;
-    border-radius: 0 !important;
-    border-bottom: 1px solid rgba(255,255,255,0.04) !important;
-    box-shadow: none !important;
-    min-width: unset !important;
-    padding: 4px 0 !important;
-    display: none !important;
-    max-height: none !important;
-    overflow: visible !important;
-  }
-
-  .nav-group.open .nav-dropdown {
-    display: block !important;
-  }
-
-  .nav-item {
-    padding: 8px 16px 8px 12px !important;
-    border-radius: 0 !important;
-    font-size: 0.76rem !important;
-    gap: 8px !important;
-  }
-
-  .nav-item.active-chapter {
-    background: rgba(0,229,160,0.1) !important;
-    border-right: 3px solid var(--accent) !important;
-  }
-
-  /* User menu at bottom of sidebar */
-  #user-menu-btn {
-    margin-top: auto !important;
-    width: 100% !important;
-    padding: 14px 16px !important;
-    border-radius: 0 !important;
-    border-top: 1px solid var(--border) !important;
-    font-size: 0.8rem !important;
-    justify-content: flex-end !important;
-    flex-shrink: 0 !important;
-  }
-
-  /* Hide hamburger on desktop */
-  #hamburgerBtn { display: none !important; }
-  #mobileDrawer { display: none !important; }
-
-  /* ── MAIN CONTENT: push right of sidebar ── */
-  #main-content {
-    margin-right: 248px !important;
-    padding-top: 0 !important;
-  }
-
-  /* ── COURSE WRAP: centered with good max-width ── */
-  .course-wrap {
-    max-width: 840px !important;
-    margin: 0 auto !important;
-    padding: 52px 52px 120px !important;
-  }
-
-  /* ── CHAPTERS: tighter spacing feels intentional ── */
-  .chapter {
-    padding: 60px 0 48px !important;
-  }
-
-  .chapter-title {
-    font-size: 1.75rem !important;
-    line-height: 1.2 !important;
-  }
-
-  .chapter-num {
-    min-width: 50px !important;
-    height: 50px !important;
-    font-size: 1.05rem !important;
-  }
-
-  .chapter-header {
-    gap: 20px !important;
-    margin-bottom: 32px !important;
-  }
-
-  /* ── BETTER TEXT SIZES ON DESKTOP ── */
-  p, li { font-size: 0.96rem !important; line-height: 1.8 !important; }
-
-  .callout-body { font-size: 0.88rem !important; }
-
-  /* ── TABLES ── */
-  td, th { font-size: 0.86rem !important; }
-
-  /* ── SIMULATORS ── */
-  .imod {
-    padding: 24px !important;
-  }
-  .imod-title { font-size: 1rem !important; }
-  .imod-label { font-size: 0.84rem !important; }
-  .imod-val { font-size: 1rem !important; }
-
-  /* ── QUIZ/EXAM ── */
-  .q-opt, [class*="q-opt"] {
-    font-size: 0.88rem !important;
-    padding: 12px 16px !important;
-  }
-
-  /* ── LOGIN CARD ── */
-  .login-card {
-    max-width: 460px !important;
-    padding: 44px 40px !important;
-  }
-  .login-logo { font-size: 1.7rem !important; }
-  .login-input { font-size: 1rem !important; padding: 12px 16px !important; }
-
-  /* ── GLOSSARY: two columns on desktop ── */
-  #gls-wrap, .glossary-grid {
-    column-count: 2 !important;
-    column-gap: 40px !important;
-  }
-}
-
-/* ═══════════════════════════════════════════════
-   WIDE DESKTOP — min-width: 1440px
-   More breathing room
-   ═══════════════════════════════════════════════ */
-
-@media (min-width: 1440px) {
-
-  .course-nav {
-    width: 268px !important;
-  }
-
-  #main-content {
-    margin-right: 268px !important;
-  }
-
-  .course-wrap {
-    max-width: 900px !important;
-    padding: 60px 72px 140px !important;
-  }
-
-  .chapter-title {
-    font-size: 1.95rem !important;
-  }
-
-  html { font-size: 17px !important; }
-}
 </style>
 <script id="sla-modules-js">
 // StockLens Academy — Interactive Module JS (v3 — fixed)
@@ -2351,6 +2136,7 @@ async function doLogin() {
 async function showCourse(user) {
   document.getElementById('login-gate').classList.add('hidden');
   document.body.classList.remove('login-open');
+  document.body.classList.add('course-active');
   document.body.style.overflow = '';
   document.body.style.position = '';
   const mc = document.getElementById('main-content');
@@ -3351,3 +3137,113 @@ function simGoDrawer(id){
 </script>
 </body>
 </html>
+
+/* DESKTOP — scoped to body.course-active only */
+@media (min-width: 1024px) {
+  body.course-active .course-nav {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: auto !important;
+    width: 248px !important;
+    height: 100vh !important;
+    padding: 0 !important;
+    border-bottom: none !important;
+    border-left: 1px solid var(--border) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    gap: 0 !important;
+  }
+  body.course-active .nav-logo {
+    padding: 20px 20px 14px !important;
+    font-size: 1rem !important;
+    border-bottom: 1px solid var(--border) !important;
+    width: 100% !important;
+    flex-shrink: 0 !important;
+  }
+  body.course-active .nav-groups {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    margin: 8px 0 0 0 !important;
+    gap: 0 !important;
+    flex: 1 !important;
+    overflow: visible !important;
+    width: 100% !important;
+  }
+  body.course-active .nav-group {
+    position: relative !important;
+    width: 100% !important;
+  }
+  body.course-active .nav-group-btn {
+    width: 100% !important;
+    padding: 10px 16px !important;
+    font-size: 0.78rem !important;
+    border-radius: 0 !important;
+    justify-content: space-between !important;
+    border-bottom: 1px solid rgba(255,255,255,0.04) !important;
+  }
+  body.course-active .nav-dropdown {
+    position: static !important;
+    opacity: 1 !important;
+    transform: none !important;
+    background: rgba(0,0,0,0.25) !important;
+    border: none !important;
+    border-radius: 0 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.04) !important;
+    box-shadow: none !important;
+    min-width: unset !important;
+    padding: 4px 0 !important;
+    display: none !important;
+    overflow: visible !important;
+  }
+  body.course-active .nav-group.open .nav-dropdown {
+    display: block !important;
+  }
+  body.course-active .nav-item {
+    padding: 8px 16px 8px 12px !important;
+    border-radius: 0 !important;
+    font-size: 0.76rem !important;
+  }
+  body.course-active .nav-item.active-chapter {
+    background: rgba(0,229,160,0.1) !important;
+    border-right: 3px solid var(--accent) !important;
+  }
+  body.course-active #user-menu-btn {
+    margin-top: auto !important;
+    width: 100% !important;
+    padding: 14px 16px !important;
+    border-radius: 0 !important;
+    border-top: 1px solid var(--border) !important;
+    font-size: 0.8rem !important;
+    flex-shrink: 0 !important;
+  }
+  body.course-active #hamburgerBtn { display: none !important; }
+  body.course-active #mobileDrawer { display: none !important; }
+  body.course-active #main-content {
+    margin-right: 248px !important;
+  }
+  body.course-active .course-wrap {
+    max-width: 840px !important;
+    margin: 0 auto !important;
+    padding: 52px 52px 120px !important;
+  }
+  body.course-active .chapter { padding: 60px 0 48px !important; }
+  body.course-active .chapter-title { font-size: 1.75rem !important; }
+  body.course-active .chapter-num { min-width: 50px !important; height: 50px !important; font-size: 1.05rem !important; }
+  body.course-active .chapter-header { gap: 20px !important; margin-bottom: 32px !important; }
+  body.course-active .imod { padding: 24px !important; }
+  body.course-active .imod-title { font-size: 1rem !important; }
+  body.course-active .imod-label { font-size: 0.84rem !important; }
+  body.course-active td, body.course-active th { font-size: 0.86rem !important; }
+}
+
+@media (min-width: 1440px) {
+  body.course-active .course-nav { width: 268px !important; }
+  body.course-active #main-content { margin-right: 268px !important; }
+  body.course-active .course-wrap { max-width: 900px !important; padding: 60px 72px 140px !important; }
+  body.course-active .chapter-title { font-size: 1.95rem !important; }
+}
+
