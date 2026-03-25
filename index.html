@@ -1205,7 +1205,7 @@ function calcCompound(){
   }
   const total=Math.round(balance);
   const profit=total-totalInvested;
-  const mult=(total/(p+m*12)).toFixed(2);
+  const mult=(total/Math.max(totalInvested,1)).toFixed(2);
   const doublingYears=(72/r).toFixed(1);
 
   function fmt(n){return n>=1000000?'₪'+(n/1000000).toFixed(2)+'M':n>=1000?'₪'+(n/1000).toFixed(0)+'K':'₪'+n;}
@@ -1825,21 +1825,42 @@ document.addEventListener('sla-course-ready', function() {
   if(typeof calcRR==='function') try{calcRR();}catch(e){}
   if(typeof calcMacro==='function') try{calcMacro();}catch(e){}
   if(typeof calcCC==='function') try{calcCC();}catch(e){}
-  if(typeof setDemoScen==='function') try{setDemoScen('bull');}catch(e){}
   if(typeof updateFG==='function') try{updateFG(65);}catch(e){}
   if(typeof updateMacdManual==='function') try{updateMacdManual();}catch(e){}
+
+  // setDemoScen lives in encrypted content — retry until available
+  (function tryDemoScen(attempt){
+    if(typeof setDemoScen==='function'){
+      try{setDemoScen('bull');}catch(e){}
+    } else if(attempt<20){
+      setTimeout(function(){tryDemoScen(attempt+1);}, 150);
+    }
+  })(0);
+
   // Charts — init with delay to ensure canvas has rendered
   setTimeout(function(){
     try{if(typeof initChart1==='function') initChart1();}catch(e){}
     try{if(typeof attachCompareClick==='function') attachCompareClick();}catch(e){}
-  }, 200);
+  }, 300);
+
+  // Re-init charts after longer delay for slow connections
+  setTimeout(function(){
+    try{if(typeof initChart1==='function') initChart1();}catch(e){}
+    try{if(typeof initChart2==='function') initChart2();}catch(e){}
+    try{if(typeof initChart3==='function') initChart3();}catch(e){}
+    try{if(typeof initChart4==='function') initChart4();}catch(e){}
+    try{if(typeof attachCompareClick==='function') attachCompareClick();}catch(e){}
+    try{if(typeof calcCompound==='function') calcCompound();}catch(e){}
+    try{if(typeof calcCC==='function') calcCC();}catch(e){}
+  }, 800);
+
   // Sync all number inputs with slider values
   setTimeout(function(){
     document.querySelectorAll('.imod-slider').forEach(function(sl){
       const numEl=document.getElementById(sl.id+'-num');
       if(numEl) numEl.value=sl.value;
     });
-  }, 300);
+  }, 400);
 });
 
 window.addEventListener('resize', function(){
@@ -2163,6 +2184,7 @@ window.addEventListener('resize', function(){
           <button class="nav-sims-item" onclick="simGo('sim-orders')"><span class="sim-icon">📋</span><span class="sim-label">הוראות מסחר</span><span class="sim-chapter">פרק 3</span></button>
           <button class="nav-sims-item" onclick="simGo('mod-valuation')"><span class="sim-icon">🔍</span><span class="sim-label">מחשבון P/E ו-DCF</span><span class="sim-chapter">פרק 4</span></button>
           <button class="nav-sims-item" onclick="simGo('mod-risk')"><span class="sim-icon">⚖️</span><span class="sim-label">Risk/Reward</span><span class="sim-chapter">פרק 7</span></button>
+          <button class="nav-sims-item" onclick="simGo('mod-cc')"><span class="sim-icon">📈</span><span class="sim-label">סימולטור אופציות</span><span class="sim-chapter">פרק 7+</span></button>
           <button class="nav-sims-item" onclick="simGo('sim-bias')"><span class="sim-icon">🧠</span><span class="sim-label">Bias — קבלת החלטות</span><span class="sim-chapter">פרק 9</span></button>
           <button class="nav-sims-item" onclick="simGo('sim-portfolio')"><span class="sim-icon">🎮</span><span class="sim-label">תיק דמו 12 חודשים</span><span class="sim-chapter">פרק 11</span></button>
         </div>
@@ -2213,6 +2235,7 @@ window.addEventListener('resize', function(){
     <button class="drawer-item" onclick="simGoDrawer('sim-orders')"><span style="width:22px;text-align:center;display:inline-block">📋</span>הוראות מסחר</button>
     <button class="drawer-item" onclick="simGoDrawer('mod-valuation')"><span style="width:22px;text-align:center;display:inline-block">🔍</span>מחשבון P/E ו-DCF</button>
     <button class="drawer-item" onclick="simGoDrawer('mod-risk')"><span style="width:22px;text-align:center;display:inline-block">⚖️</span>Risk/Reward</button>
+    <button class="drawer-item" onclick="simGoDrawer('mod-cc')"><span style="width:22px;text-align:center;display:inline-block">📈</span>סימולטור אופציות</button>
     <button class="drawer-item" onclick="simGoDrawer('sim-bias')"><span style="width:22px;text-align:center;display:inline-block">🧠</span>Bias — קבלת החלטות</button>
     <button class="drawer-item" onclick="simGoDrawer('sim-portfolio')"><span style="width:22px;text-align:center;display:inline-block">🎮</span>תיק דמו 12 חודשים</button>
 
@@ -3423,9 +3446,32 @@ document.addEventListener('click',function(e){
 function simGo(id){
   var btn=document.getElementById('simNavBtn');
   if(btn) btn.classList.remove('open');
+  var el=document.getElementById(id);
+  if(!el){
+    // Element may be inside encrypted content — wait for it
+    var attempts=0;
+    var interval=setInterval(function(){
+      el=document.getElementById(id);
+      attempts++;
+      if(el){
+        clearInterval(interval);
+        el.scrollIntoView({behavior:'smooth',block:'start'});
+        setTimeout(function(){
+          el.style.transition='box-shadow .3s';
+          el.style.boxShadow='0 0 0 2px rgba(0,229,160,0.6)';
+          setTimeout(function(){el.style.boxShadow='';},1200);
+        },400);
+      } else if(attempts>20){
+        clearInterval(interval);
+        // fallback: scroll to chapter 7+ (options)
+        if(id==='mod-cc') scrollToId('ch7opt');
+      }
+    },150);
+    return;
+  }
   scrollToId(id);
   setTimeout(function(){
-    var el=document.getElementById(id);
+    el=document.getElementById(id);
     if(el){
       el.style.transition='box-shadow .3s';
       el.style.boxShadow='0 0 0 2px rgba(0,229,160,0.6)';
