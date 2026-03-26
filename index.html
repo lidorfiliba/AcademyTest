@@ -1399,14 +1399,16 @@ function attachCompareClick(){
 
 // ── RISK/REWARD ──────────────────────────────────────────────────────────────
 function calcRR(){
+  // Sync num inputs FROM sliders first, so both are aligned
+  syncNumFromSlider('rr-portfolio');syncNumFromSlider('rr-risk-pct');
+  syncNumFromSlider('rr-entry');syncNumFromSlider('rr-stop');syncNumFromSlider('rr-target');
+
+  // Now read the (freshly synced) values
   const portfolio=parseFloat(document.getElementById('rr-portfolio').value)||10000;
   const riskPct=parseFloat(document.getElementById('rr-risk-pct').value)/100||0.02;
   const entry=parseFloat(document.getElementById('rr-entry').value)||100;
   const stopRaw=parseFloat(document.getElementById('rr-stop').value)||93;
   const targetRaw=parseFloat(document.getElementById('rr-target').value)||121;
-
-  syncNumFromSlider('rr-portfolio');syncNumFromSlider('rr-risk-pct');
-  syncNumFromSlider('rr-entry');syncNumFromSlider('rr-stop');syncNumFromSlider('rr-target');
 
   // FIXED: don't auto-clamp stop/target — show what user set, just warn
   const stop = Math.min(stopRaw, entry - 0.01);
