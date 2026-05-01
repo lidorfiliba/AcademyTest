@@ -774,7 +774,7 @@ thead th { background: rgba(11,21,40,.85) !important; border-bottom: 1px solid r
     <div class="divider"></div>
     <div class="drawer-section">
       <div class="drawer-label" style="color:var(--gold)">📊 Market Data API Key <span style="font-size:.55rem;color:var(--accent)">(Options Tool)</span></div>
-      <div class="drawer-desc">Key from <a href="https://dashboard.marketdata.app/marketdata/tokens" target="_blank">dashboard.marketdata.app</a><br>נדרש לנתוני האופציות עצמם (Calls/Puts).<br><span style="color:var(--gold)">ℹ️ FMP key מוסיף הקשר טכני (SMA50, טווח שנתי, מחיר).</span></div>
+      <div class="drawer-desc">Key from <a href="https://www.marketdata.app/marketdata/aff/go/lidor5003" target="_blank">marketdata.app</a><br>נדרש לנתוני האופציות עצמם (Calls/Puts).<br><span style="color:var(--gold)">ℹ️ FMP key מוסיף הקשר טכני (SMA50, טווח שנתי, מחיר).</span></div>
       <div style="display:flex;gap:8px;align-items:center;">
         <input type="text" id="mdKeyInput" placeholder="Paste Market Data key…" autocomplete="off" spellcheck="false" style="-webkit-text-security:disc;flex:1;min-width:0;background:var(--surface);border:1px solid var(--border2);border-radius:8px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.82rem;padding:10px 13px;outline:none;" />
         <button class="icon-btn" onclick="toggleKeyVis('mdKeyInput',this)" title="Show/Hide" style="flex-shrink:0;font-size:.85rem;width:38px;height:38px;">&#128065;</button>
@@ -1207,13 +1207,13 @@ thead th { background: rgba(11,21,40,.85) !important; border-bottom: 1px solid r
       <div style="background:rgba(247,201,72,0.04);border:1px solid rgba(247,201,72,0.2);border-radius:10px;padding:20px 24px;margin-bottom:16px">
         <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:14px;color:var(--gold)">🔑 איך מקבלים Market Data API Key?</div>
         <div style="font-size:.72rem;color:var(--muted);line-height:2">
-          <b style="color:var(--text)">שלב 1:</b> כנס לאתר <a href="https://marketdata.app" target="_blank" style="color:var(--gold)">marketdata.app</a> וצור חשבון חינמי<br>
-          <b style="color:var(--text)">שלב 2:</b> עבור לדף <a href="https://dashboard.marketdata.app/marketdata/tokens" target="_blank" style="color:var(--gold)">dashboard.marketdata.app/marketdata/tokens</a><br>
+          <b style="color:var(--text)">שלב 1:</b> כנס לאתר <a href="https://www.marketdata.app/marketdata/aff/go/lidor5003" target="_blank" style="color:var(--gold)">marketdata.app</a> וצור חשבון חינמי<br>
+          <b style="color:var(--text)">שלב 2:</b> עבור לדף <a href="https://www.marketdata.app/marketdata/aff/go/lidor5003" target="_blank" style="color:var(--gold)">marketdata.app</a><br>
           <b style="color:var(--text)">שלב 3:</b> לחץ <b style="color:var(--text)">"Create Token"</b> — תקבל API Key<br>
           <b style="color:var(--text)">שלב 4:</b> הכנס אותו בהגדרות (⚙) תחת <b style="color:var(--text)">"Market Data API Key"</b><br><br>
           <div style="background:rgba(247,201,72,0.08);border:1px solid rgba(247,201,72,0.15);border-radius:7px;padding:10px 14px;line-height:1.8">
             <b style="color:var(--gold)">⚠ חשוב:</b> לנתוני האופציות עצמם (Calls/Puts, P/C Ratio) נדרש <b style="color:var(--text)">Market Data API</b> בלבד.<br>
-            <b style="color:var(--up)">ℹ️ טיפ:</b> אם יש לך גם <b style="color:var(--text)">FMP key</b>, הכלי יוסיף אוטומטית <b style="color:var(--text)">הקשר טכני</b> — SMA50, טווח שנתי ומחיר נוכחי.<br>
+            <b style="color:var(--up)">ℹ️ טיפ:</b> משתמשי <b style="color:var(--text)">Trader plan</b> ב-MarketData מקבלים הקשר טכני אוטומטית (SMA50, טווח שנתי, מחיר). משתמשי חינמי יכולים להוסיף <b style="color:var(--text)">FMP key</b> לקבלת ההקשר הזה.<br>
             החשבון החינמי של Market Data כולל גישה לנתוני אופציות delayed (15 דקות).
           </div>
         </div>
@@ -2244,48 +2244,13 @@ thead th { background: rgba(11,21,40,.85) !important; border-bottom: 1px solid r
     .pulse-macro-signal.hawkish{background:rgba(255,95,87,.06);border:1px solid rgba(255,95,87,.2);}
     .pulse-macro-signal.dovish{background:rgba(0,229,160,.06);border:1px solid rgba(0,229,160,.2);}
     .pulse-macro-signal.neutral{background:rgba(247,201,72,.06);border:1px solid rgba(247,201,72,.15);}
-
-    /* ── Market Breadth Widget ── */
-    .breadth-wrap{background:var(--surface);border:1px solid var(--border2);border-radius:14px;padding:16px 18px;backdrop-filter:blur(12px);animation:fadeUp .35s ease;}
-    .breadth-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;gap:10px;}
-    .breadth-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;color:var(--text);}
-    .breadth-meta{font-size:.6rem;color:var(--muted);letter-spacing:.5px;margin-top:2px;}
-    .breadth-refresh-btn{background:var(--surface2);border:1px solid var(--border2);border-radius:8px;color:var(--muted);font-size:.85rem;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all .2s;}
-    .breadth-refresh-btn:hover{border-color:var(--accent);color:var(--accent);}
-    .breadth-refresh-btn.spinning{animation:spin 1s linear infinite;}
-    .breadth-verdict-badge{display:inline-flex;align-items:center;gap:6px;font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;padding:5px 14px;border-radius:100px;margin-bottom:12px;}
-    .breadth-verdict-badge.strong{background:rgba(0,229,160,.1);border:1px solid rgba(0,229,160,.25);color:var(--up);}
-    .breadth-verdict-badge.weak{background:rgba(255,95,87,.1);border:1px solid rgba(255,95,87,.25);color:var(--down);}
-    .breadth-verdict-badge.mixed{background:rgba(247,201,72,.1);border:1px solid rgba(247,201,72,.2);color:var(--gold);}
-    .breadth-bar{display:flex;height:12px;border-radius:6px;overflow:hidden;margin-bottom:12px;gap:1px;}
-    .breadth-bar-green{background:#00e5a0;border-radius:6px 0 0 6px;transition:width 1s cubic-bezier(.22,1,.36,1);}
-    .breadth-bar-flat{background:rgba(255,255,255,.18);transition:width 1s cubic-bezier(.22,1,.36,1);}
-    .breadth-bar-red{background:#ff5f57;border-radius:0 6px 6px 0;transition:width 1s cubic-bezier(.22,1,.36,1);}
-    .breadth-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
-    .breadth-stat{text-align:center;padding:10px 8px;border-radius:10px;}
-    .breadth-stat.green{background:rgba(0,229,160,.06);border:1px solid rgba(0,229,160,.15);}
-    .breadth-stat.flat{background:rgba(255,255,255,.03);border:1px solid var(--border);}
-    .breadth-stat.red{background:rgba(255,95,87,.06);border:1px solid rgba(255,95,87,.15);}
-    .breadth-stat-num{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.25rem;}
-    .breadth-stat.green .breadth-stat-num{color:var(--up);}
-    .breadth-stat.flat .breadth-stat-num{color:var(--muted);}
-    .breadth-stat.red .breadth-stat-num{color:var(--down);}
-    .breadth-stat-lbl{font-size:.58rem;color:var(--muted);letter-spacing:.5px;margin-top:2px;}
-    .breadth-stat-pct{font-size:.72rem;font-weight:600;margin-top:2px;}
-    .breadth-stat.green .breadth-stat-pct{color:var(--up);}
-    .breadth-stat.flat .breadth-stat-pct{color:var(--muted);}
-    .breadth-stat.red .breadth-stat-pct{color:var(--down);}
-    .breadth-cache-note{font-size:.6rem;color:var(--muted);text-align:center;margin-top:10px;letter-spacing:.5px;}
-    .breadth-loading{text-align:center;padding:24px;color:var(--muted);font-size:.75rem;}
-    .breadth-no-key{text-align:center;padding:14px;font-size:.72rem;color:var(--muted);}
 </style>
   <div class="pulse-wrap">
     <div class="pulse-header">
       <div class="pulse-title">דופק ה<em>שוק</em></div>
       <div class="pulse-sub">Market Pulse · Macro Dashboard</div>
-      <button class="pulse-refresh" onclick="pulseLoad();loadBreadthWidget(true)">🔄 רענן נתונים</button>
+      <button class="pulse-refresh" onclick="pulseLoad()">🔄 רענן נתונים</button>
     </div>
-    <div id="pulse-breadth" style="margin-bottom:14px;"></div>
     <div id="pulse-content">
       <div class="pulse-loading"><div class="spinner"></div><div>טוען נתוני שוק...</div></div>
     </div>
@@ -3187,7 +3152,7 @@ function switchTab(t){
   if(t === 'spread') { setTimeout(function(){ if(typeof spRenderPortfolio==='function') spRenderPortfolio(); }, 50); }
   if(t === 'board') { if(typeof boardCheckKey==='function') boardCheckKey(); }
   if(t === 'watchlist') { if(typeof wlRender==='function') wlRender(); }
-  if(t === 'pulse') { if(typeof loadBreadthWidget==='function') loadBreadthWidget(false); if(typeof pulseLoad==='function' && !window._pulseLoaded) { pulseLoad(); window._pulseLoaded = true; } }
+  if(t === 'pulse') { if(typeof pulseLoad==='function' && !window._pulseLoaded) { pulseLoad(); window._pulseLoaded = true; } }
   // Scroll to top of the panel for mobile UX
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -3390,138 +3355,6 @@ function wlSendToBoard(symbol){
 }
 
 /* ══════════════════════════════════════════════ */
-/* ══════════ MARKET BREADTH ══════════ */
-/* ══════════════════════════════════════════════ */
-const BREADTH_CACHE_KEY = 'sl_breadth_c';
-const BREADTH_TTL = 30 * 60 * 1000;
-
-const BREADTH_SYMBOLS = [
-  'AAPL','MSFT','NVDA','META','GOOGL','AVGO','ORCL','ADBE','CRM','AMD',
-  'INTC','QCOM','TXN','NOW','INTU','CSCO','AMAT','MU','PANW','ADI',
-  'LRCX','KLAC','MCHP','CDNS','SNPS',
-  'JPM','BAC','WFC','GS','MS','BLK','SCHW','C','AXP','USB',
-  'PNC','COF','TFC','SPGI','MCO','ICE','V','MA',
-  'JNJ','UNH','MRK','ABT','LLY','TMO','PFE','AMGN','BMY','GILD',
-  'HCA','MDT','SYK','ISRG','VRTX','REGN','EW','BSX',
-  'HD','MCD','NKE','SBUX','TJX','LOW','BKNG','GM','CMG','YUM','ROST','TSLA',
-  'PG','KO','PEP','WMT','COST','PM','MO','CL','GIS','MKC',
-  'XOM','CVX','COP','EOG','SLB','MPC','VLO','PSX','OXY','HES',
-  'HON','CAT','RTX','UNP','BA','GE','LMT','DE','FDX','UPS','MMM','EMR',
-  'LIN','APD','NEM','FCX','DOW','DD',
-  'AMT','PLD','CCI','EQIX','PSA',
-  'NEE','DUK','SO','AEP','EXC',
-  'VZ','T','TMUS','NFLX','DIS'
-];
-
-function breadthGetCache(){
-  try{var c=JSON.parse(localStorage.getItem(BREADTH_CACHE_KEY)||'null');if(c&&(Date.now()-c.ts)<BREADTH_TTL)return c;}catch(e){}
-  return null;
-}
-function breadthSetCache(data){
-  try{localStorage.setItem(BREADTH_CACHE_KEY,JSON.stringify(data));}catch(e){}
-}
-function breadthClearCache(){
-  try{localStorage.removeItem(BREADTH_CACHE_KEY);}catch(e){}
-}
-
-async function fetchBreadthData(){
-  var key=getFmpKey(); if(!key) return null;
-  var half=Math.ceil(BREADTH_SYMBOLS.length/2);
-  var b1=BREADTH_SYMBOLS.slice(0,half), b2=BREADTH_SYMBOLS.slice(half);
-  var u1='https://financialmodelingprep.com/stable/quote?symbol='+b1.join(',')+'&apikey='+key;
-  var u2='https://financialmodelingprep.com/stable/quote?symbol='+b2.join(',')+'&apikey='+key;
-  var results=await Promise.all([
-    fetch(u1).then(function(r){return r.json();}).catch(function(){return[];}),
-    fetch(u2).then(function(r){return r.json();}).catch(function(){return[];})
-  ]);
-  var all=(Array.isArray(results[0])?results[0]:[]).concat(Array.isArray(results[1])?results[1]:[]);
-  if(!all.length) return null;
-  var green=0,red=0,flat=0;
-  all.forEach(function(q){
-    var cp=parseFloat(q.changePercentage)||0;
-    if(cp>0.1) green++; else if(cp<-0.1) red++; else flat++;
-  });
-  return {green:green,red:red,flat:flat,total:all.length,ts:Date.now()};
-}
-
-function breadthVerdictInfo(green,total){
-  var pct=total>0?green/total*100:50;
-  if(pct>=65) return {label:'שוק חזק',emoji:'🟢',cls:'strong'};
-  if(pct<=35) return {label:'שוק חלש',emoji:'🔴',cls:'weak'};
-  return {label:'שוק מעורב',emoji:'🟡',cls:'mixed'};
-}
-
-function buildBreadthHTML(data){
-  var green=data.green,red=data.red,flat=data.flat,total=data.total,ts=data.ts;
-  var v=breadthVerdictInfo(green,total);
-  var gP=total>0?(green/total*100).toFixed(1):'0.0';
-  var rP=total>0?(red/total*100).toFixed(1):'0.0';
-  var fP=total>0?(flat/total*100).toFixed(1):'0.0';
-  var ageMs=Date.now()-ts;
-  var ageStr=ageMs<60000?'עכשיו':Math.round(ageMs/60000)+' דק\' אחרונות';
-  var isCached=ageMs>5000;
-  return '<div class="breadth-wrap">'+
-    '<div class="breadth-header">'+
-      '<div>'+
-        '<div class="breadth-title">📊 רוחב השוק · S&amp;P 500</div>'+
-        '<div class="breadth-meta">מבוסס על '+total+' מניות מרכזיות · עודכן: '+ageStr+'</div>'+
-      '</div>'+
-      '<button class="breadth-refresh-btn" onclick="breadthRefresh()" title="רענן רוחב שוק">🔄</button>'+
-    '</div>'+
-    '<div class="breadth-verdict-badge '+v.cls+'">'+v.emoji+' '+v.label+'</div>'+
-    '<div class="breadth-bar">'+
-      '<div class="breadth-bar-green" style="width:'+gP+'%" title="'+green+' מניות עולות"></div>'+
-      '<div class="breadth-bar-flat" style="width:'+fP+'%" title="'+flat+' ללא שינוי"></div>'+
-      '<div class="breadth-bar-red" style="width:'+rP+'%" title="'+red+' מניות יורדות"></div>'+
-    '</div>'+
-    '<div class="breadth-stats">'+
-      '<div class="breadth-stat green">'+
-        '<div class="breadth-stat-num">'+green+'</div>'+
-        '<div class="breadth-stat-lbl">▲ עולות</div>'+
-        '<div class="breadth-stat-pct">'+gP+'%</div>'+
-      '</div>'+
-      '<div class="breadth-stat flat">'+
-        '<div class="breadth-stat-num">'+flat+'</div>'+
-        '<div class="breadth-stat-lbl">— ללא שינוי</div>'+
-        '<div class="breadth-stat-pct">'+fP+'%</div>'+
-      '</div>'+
-      '<div class="breadth-stat red">'+
-        '<div class="breadth-stat-num">'+red+'</div>'+
-        '<div class="breadth-stat-lbl">▼ יורדות</div>'+
-        '<div class="breadth-stat-pct">'+rP+'%</div>'+
-      '</div>'+
-    '</div>'+
-    (isCached?'<div class="breadth-cache-note">💾 מהמטמון · רענון אוטומטי כל 30 דקות</div>':'')+
-  '</div>';
-}
-
-async function loadBreadthWidget(forceRefresh){
-  var el=document.getElementById('pulse-breadth');
-  if(!el) return;
-  if(!getFmpKey()){
-    el.innerHTML='<div class="breadth-no-key">📊 רוחב שוק זמין עם FMP key</div>';
-    return;
-  }
-  if(!forceRefresh){
-    var cached=breadthGetCache();
-    if(cached){el.innerHTML=buildBreadthHTML(cached);return;}
-  }
-  el.innerHTML='<div class="breadth-loading"><span class="spinner" style="display:inline-block;width:18px;height:18px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;vertical-align:middle;margin-left:8px;"></span>טוען רוחב שוק...</div>';
-  try{
-    var data=await fetchBreadthData();
-    if(data){breadthSetCache(data);el.innerHTML=buildBreadthHTML(data);}
-    else{el.innerHTML='<div class="breadth-no-key">⚠️ לא הצלחנו לטעון נתוני רוחב שוק</div>';}
-  }catch(e){
-    el.innerHTML='<div class="breadth-no-key">⚠️ שגיאה: '+(e.message||'')+'</div>';
-  }
-}
-
-function breadthRefresh(){
-  breadthClearCache();
-  loadBreadthWidget(true);
-}
-
-/* ══════════════════════════════════════════════ */
 /* ══════════ MARKET PULSE ══════════ */
 /* ══════════════════════════════════════════════ */
 const PULSE_SECTORS = [
@@ -3568,15 +3401,17 @@ async function pulseLoad(){
     if(fallback) attempts.push(fallback);
     for(var a = 0; a < attempts.length; a++){
       var sym = attempts[a];
-      // Try FMP quote
       if(hasFmp){
         try{
           var q = await fmpFetch('quote', {symbol: sym});
           var data = Array.isArray(q) ? q[0] : q;
           if(data && data.price != null) return { symbol:sym, price:data.price, change:data.change||0, changePercentage:data.changePercentage||0, _source:'FMP' };
-        } catch(e){}
+          // FMP returned empty — log it
+          if(!window._quoteErr) window._quoteErr = 'FMP_EMPTY:'+sym;
+        } catch(e){
+          if(!window._quoteErr) window._quoteErr = e.message+'@'+sym;
+        }
       }
-      // Try Alpha Vantage GLOBAL_QUOTE (works for most US ETFs)
       if(hasAv && !isAvLimited()){
         try{
           var avData = await safeFetch(BASE + '?function=GLOBAL_QUOTE&symbol=' + encodeURIComponent(sym) + '&apikey=' + getKey());
@@ -3587,20 +3422,112 @@ async function pulseLoad(){
             var chgPct = parseFloat((gq['10. change percent']||'').replace('%',''));
             return { symbol:sym, price:price, change:chg||0, changePercentage:chgPct||0, _source:'AV' };
           }
-        } catch(e){}
+          if(!window._quoteErr) window._quoteErr = 'AV_EMPTY:'+sym+' resp:'+JSON.stringify(avData).slice(0,80);
+        } catch(e){
+          if(!window._quoteErr) window._quoteErr = 'AV_ERR:'+e.message;
+        }
       }
     }
     return null;
   }
 
   var macroPromise = null;
+  var fomcPromise = null;
   if(hasFmp){
-    var macroCfgs=[{k:'cpi',name:'CPI',cls:'cpi',isRate:false},{k:'infl',name:'inflationRate',cls:'infl',isRate:true},{k:'ret',name:'retailSales',cls:'ret',isRate:false},{k:'rate',name:'federalFunds',cls:'rate',isRate:true}];
-    macroPromise=Promise.all(macroCfgs.map(function(cfg){
-      return fmpFetch('economic-indicators',{name:cfg.name,limit:13})
+    var today=new Date();
+    var toStr=function(d){return d.toISOString().slice(0,10);};
+    var pastDate=new Date(today); pastDate.setDate(today.getDate()-60);
+    var futureDate=new Date(today); futureDate.setDate(today.getDate()+90);
+
+    // Fetch CPI from economic-calendar (official BLS release = Headline CPI YoY%)
+    // Falls back to inflationRate indicator if calendar has no actual yet
+    // CPI Headline: fetch calendar 13 months back → find "CPI (Mon)" absolute index events
+    // Compare current month index vs same month last year → true Headline YoY
+    var longPast=new Date(today); longPast.setMonth(today.getMonth()-14);
+    var cpiCalendarPromise = fmpFetch('economic-calendar',{from:toStr(longPast),to:toStr(today)})
+      .then(function(events){
+        if(!Array.isArray(events)) return null;
+        // Absolute CPI index events — name like "CPI (Mar)" with value ~330
+        // These have no "YoY"/"MoM"/"Core" in the name and value > 200 (index level)
+        var indexEvents=events.filter(function(e){
+          return e.country==='US' && e.actual!=null && e.actual>200 &&
+                 /^CPI \([A-Za-z]+\)$/.test((e.event||'').trim());
+        });
+        indexEvents.sort(function(a,b){return new Date(b.date)-new Date(a.date);});
+        if(indexEvents.length>=2){
+          var latest=indexEvents[0];
+          var latestDate=new Date(latest.date);
+          // Find same month 1 year ago
+          var targetYear=latestDate.getFullYear()-1;
+          var targetMonth=latestDate.getMonth();
+          var yearAgo=indexEvents.find(function(e){
+            var d=new Date(e.date);
+            return d.getFullYear()===targetYear && d.getMonth()===targetMonth;
+          });
+          if(yearAgo){
+            var yoy=((latest.actual-yearAgo.actual)/yearAgo.actual)*100;
+            // Find prev month for MoM direction
+            var prev=indexEvents[1];
+            var prevYoy=prev&&yearAgo?((prev.actual-yearAgo.actual)/yearAgo.actual)*100:yoy;
+            return {actual:parseFloat(yoy.toFixed(2)),previous:parseFloat(prevYoy.toFixed(2)),date:latest.date,event:'CPI Index YoY (Headline)'};
+          }
+        }
+        // Fallback to inflationRate indicator
+        return null;
+      })
+      .catch(function(){return null;})
+      .then(function(res){
+        if(res&&res.actual!=null) return res;
+        return fmpFetch('economic-indicators',{name:'inflationRate',limit:2})
+          .then(function(d){
+            if(!Array.isArray(d)||!d.length) return null;
+            return {actual:parseFloat(d[0].value),previous:d[1]?parseFloat(d[1].value):parseFloat(d[0].value),date:d[0].date,event:'inflationRate (fallback)'};
+          })
+          .catch(function(){return null;});
+      });
+
+    var macroCfgs=[
+      {k:'infl',name:'realGDP',      cls:'infl',isRate:false,limit:2},
+      {k:'ret', name:'retailSales',  cls:'ret', isRate:false,limit:13},
+      {k:'rate',name:'federalFunds', cls:'rate',isRate:true, limit:2}
+    ];
+    var indicatorsPromise=Promise.all(macroCfgs.map(function(cfg){
+      return fmpFetch('economic-indicators',{name:cfg.name,limit:cfg.limit})
         .then(function(d){return{k:cfg.k,cls:cfg.cls,isRate:cfg.isRate,data:Array.isArray(d)?d:[]};})
         .catch(function(){return{k:cfg.k,cls:cfg.cls,isRate:cfg.isRate,data:[]};});
     }));
+
+    // Combine: cpiCalendar result + 3 indicators
+    macroPromise=Promise.all([cpiCalendarPromise, indicatorsPromise])
+      .then(function(results){
+        var cpiCal=results[0];
+        var indicators=results[1];
+        // Build CPI card from calendar data, or fall back to inflationRate indicator
+        var cpiCard;
+        if(cpiCal && cpiCal.actual!=null){
+          var src=/fallback/i.test(cpiCal.event||'')?'FMP':'BLS';
+          cpiCard={k:'cpi',cls:'cpi',isRate:true,data:[
+            {date:cpiCal.date, value:cpiCal.actual},
+            {date:'prev',      value:cpiCal.previous||cpiCal.actual}
+          ],_source:src,_eventName:cpiCal.event};
+        } else {
+          // Last resort: empty placeholder so card still renders with "—"
+          cpiCard={k:'cpi',cls:'cpi',isRate:true,data:[{date:'',value:0},{date:'',value:0}],_source:'N/A',_eventName:'no data'};
+        }
+        return [cpiCard].concat(indicators);
+      });
+
+    // FOMC next meeting
+    fomcPromise=fmpFetch('economic-calendar',{from:toStr(today),to:toStr(futureDate)})
+      .then(function(events){
+        if(!Array.isArray(events)) return null;
+        var fomc=events.filter(function(e){
+          return e.event&&/federal reserve|fomc|interest rate decision/i.test(e.event)&&e.country==='US';
+        });
+        fomc.sort(function(a,b){return new Date(a.date)-new Date(b.date);});
+        return fomc.length?fomc[0]:null;
+      })
+      .catch(function(){return null;});
   }
 
   try{
@@ -3631,11 +3558,30 @@ async function pulseLoad(){
     var workingCount = all.filter(function(x){return x.q;}).length;
 
     if(workingCount === 0){
-      content.innerHTML = '<div class="pulse-error">⚠ לא הצלחנו להביא נתונים. ייתכן חריגה ממכסת FMP/AV.<br><br><button class="btn" onclick="pulseLoad()" style="margin-top:8px">🔄 נסה שוב</button></div>';
+      var reason = window._quoteErr || '';
+      var msg = '⚠ לא הצלחנו להביא נתונים.<br><br>';
+      if(reason.indexOf('FMP_AUTH')>-1 || reason.indexOf('FMP_LIMIT')>-1){
+        msg += '📊 <b>חריגה ממכסת FMP</b> (250 בקשות/יום).<br>נסה מפתח חדש או המתן מחר.';
+      } else if(reason.indexOf('FMP_EMPTY')>-1){
+        msg += '🔑 <b>FMP החזיר תוצאה ריקה</b> — ייתכן שהמפתח לא תקין.<br><small style="color:var(--muted)">'+reason+'</small>';
+      } else if(reason){
+        msg += '<small style="color:var(--muted)">'+reason+'</small>';
+      } else {
+        msg += 'ייתכן חריגה ממכסת FMP/AV.';
+      }
+      window._quoteErr = null;
+      content.innerHTML = '<div class="pulse-error">'+msg+'<br><br><button class="btn" onclick="pulseLoad()" style="margin-top:8px">🔄 נסה שוב</button></div>';
       return;
     }
-    var macroData=macroPromise?await macroPromise:null;
-    pulseRender(indices, sectors, realVix, workingCount, all.length, macroData);
+    var macroData=null;
+    if(macroPromise){
+      try{ macroData=await macroPromise; }catch(e){ macroData=null; }
+    }
+    var fomcData=null;
+    if(fomcPromise){
+      try{ fomcData=await fomcPromise; }catch(e){ fomcData=null; }
+    }
+    pulseRender(indices, sectors, realVix, workingCount, all.length, macroData, fomcData);
   } catch(e){
     content.innerHTML = '<div class="pulse-error">⚠ שגיאה: ' + (e.message||'לא ידוע') + '<br><br><button class="btn" onclick="pulseLoad()" style="margin-top:8px">🔄 נסה שוב</button></div>';
   }
@@ -3674,7 +3620,7 @@ function pulseSectorCard(sec){
   '</div>';
 }
 
-function pulseRender(indices, sectors, realVix, workingCount, totalCount, macroData){
+function pulseRender(indices, sectors, realVix, workingCount, totalCount, macroData, fomcData){
   // Use real VIX if available, otherwise fall back to VXX
   var vix = (realVix && realVix.price) ? realVix.price : null;
   // If using VXX as proxy, we don't have a real VIX number - skip the F&G display
@@ -3734,49 +3680,138 @@ function pulseRender(indices, sectors, realVix, workingCount, totalCount, macroD
   }
 
   if(macroData&&macroData.some(function(m){return m.data&&m.data.length>0;})){
-    var macroLabels={cpi:'מדד המחירים (CPI)',infl:'אינפלציה שנתית',ret:'מכירות קמעונאיות',rate:'ריבית הפד (Fed Funds)'};
+    var macroLabels={
+      cpi: 'אינפלציה שנתית — Headline CPI (YoY%)',
+      infl:'צמיחה כלכלית (GDP QoQ%)',
+      ret: 'מכירות קמעונאיות (YoY%)',
+      rate:'ריבית אפקטיבית (EFFR)'
+    };
     html+='<div style="margin-top:20px;">';
     html+='<div class="pulse-section-title">🌐 נתוני מאקרו</div>';
     html+='<div class="pulse-macro-grid">';
     var cpiVal=null,cpiPrev=null,rateVal=null;
     macroData.forEach(function(m){
       if(!m.data||!m.data.length)return;
-      var isRate=!!(m.isRate);
       var last=parseFloat(m.data[0].value);
       var displayVal,chgStr,chgCls;
-      if(isRate){
-        // federalFunds already in % 
+
+      if(m.k==='ret'){
+        // retailSales: absolute $M → try YoY% (need 13pts), fallback to MoM%
+        var prev=m.data.length>1?parseFloat(m.data[1].value):null;
+        if(m.data.length>=13){
+          var yoyBase=parseFloat(m.data[12].value);
+          var yoy=((last-yoyBase)/yoyBase*100);
+          displayVal=yoy.toFixed(2)+'%';
+          macroLabels['ret']='מכירות קמעונאיות (YoY%)';
+          if(prev!==null){
+            var mom=((last-prev)/prev*100);
+            chgStr=(mom>=0?'+':'')+mom.toFixed(2)+'% MoM';
+            chgCls=mom>=0?'up':'down';
+          }
+        } else if(prev!==null){
+          // fallback: show MoM% only
+          var mom=((last-prev)/prev*100);
+          displayVal=(mom>=0?'+':'')+mom.toFixed(2)+'%';
+          macroLabels['ret']='מכירות קמעונאיות (MoM%)';
+          chgStr='שינוי חודשי';
+          chgCls=mom>=0?'up':'down';
+        } else {
+          displayVal='—'; chgStr=''; chgCls='';
+        }
+      } else if(m.k==='infl'){
+        // realGDP: absolute $B → compute QoQ%
+        var prev=m.data.length>1?parseFloat(m.data[1].value):last;
+        var qoq=((last-prev)/prev*100);
+        displayVal=qoq.toFixed(2)+'%';
+        chgStr='Lagging indicator';  // GDP always lags ~1 quarter
+        chgCls='';
+      } else {
+        // federalFunds → direct % from FMP, no MoM (EFFR barely moves month-to-month)
         displayVal=last.toFixed(2)+'%';
         var prev=m.data.length>1?parseFloat(m.data[1].value):last;
         var chg=last-prev;
-        chgStr=(chg>=0?'+':'')+chg.toFixed(2)+'%';
+        // Only show MoM if there was actual change (>0.05pp), otherwise skip
+        chgStr=Math.abs(chg)>0.05?(chg>=0?'+':'')+chg.toFixed(2)+'% MoM':'';
         chgCls=chg>0?'down':'up';
-        if(m.k==='rate')rateVal=last;
-      } else {
-        // Index value — calculate YoY % change (month 0 vs month 12)
-        var yoyBase=m.data.length>=13?parseFloat(m.data[12].value):parseFloat(m.data[m.data.length-1].value);
-        var yoy=((last-yoyBase)/yoyBase*100);
-        displayVal=yoy.toFixed(2)+'%';
-        var prev=m.data.length>1?parseFloat(m.data[1].value):last;
-        var momChg=((last-prev)/prev*100);
-        chgStr=(momChg>=0?'+':'')+momChg.toFixed(2)+'% MoM';
-        chgCls=momChg>0?'down':'up';
-        if(m.k==='cpi'){cpiVal=yoy;cpiPrev=m.data.length>1?((prev-yoyBase)/yoyBase*100):yoy;}
+        if(m.k==='rate') rateVal=last;
+        if(m.k==='cpi'){ cpiVal=last; cpiPrev=prev; }
       }
+
       html+='<div class="pulse-macro-card '+m.cls+'">'+
-        '<div class="pulse-macro-card-lbl">'+m.k.toUpperCase()+'</div>'+
+        '<div class="pulse-macro-card-lbl">'+m.k.toUpperCase()+
+          (m.k==='cpi'&&m._source?'<span style="font-size:.5rem;opacity:.6;margin-right:4px">'+m._source+'</span>':'')+
+        '</div>'+
         '<div class="pulse-macro-card-name">'+macroLabels[m.k]+'</div>'+
         '<div class="pulse-macro-card-val">'+displayVal+'</div>'+
-        '<div class="pulse-card-chg '+chgCls+'">'+chgStr+'</div>'+
+        (chgStr?'<div class="pulse-card-chg '+chgCls+'">'+chgStr+'</div>':'')+
         '<div class="pulse-macro-card-date">'+(m.data[0].date||'').slice(0,7)+'</div>'+
         '</div>';
     });
     html+='</div>';
-    if(cpiVal!==null&&rateVal!==null){
-      var rising=cpiVal>cpiPrev,sig,sigCls;
-      if(rising&&rateVal<4.5){sig='🔴 <strong>Hawkish:</strong> האינפלציה עולה — לחץ על מניות צמיחה.';sigCls='hawkish';}
-      else if(!rising&&rateVal>4){sig='🟢 <strong>Dovish מתפתח:</strong> האינפלציה יורדת — חיובי למניות.';sigCls='dovish';}
-      else{sig='🟡 <strong>נייטרלי:</strong> הפד ב-"wait and see".';sigCls='neutral';}
+
+    if(cpiVal!==null||rateVal!==null){
+      // ── Macro Bias Engine ──────────────────────────────────────────
+      // Score: negative = Hawkish pressure, positive = Dovish/bullish
+      var score=0;
+      var reasons=[];
+
+      // 1. Inflation (CPI YoY)
+      if(cpiVal!==null){
+        if(cpiVal>4){       score-=2; reasons.push('אינפלציה גבוהה מאוד ('+cpiVal.toFixed(1)+'%)');}
+        else if(cpiVal>3){  score-=1; reasons.push('אינפלציה מעל 3% ('+cpiVal.toFixed(1)+'%)');}
+        else if(cpiVal<2){  score+=1; reasons.push('אינפלציה נמוכה ('+cpiVal.toFixed(1)+'%)');}
+        // Direction also matters
+        if(cpiPrev!==null){
+          var diff=cpiVal-cpiPrev;
+          if(diff>0.2)      score-=1;
+          else if(diff<-0.2)score+=1;
+        }
+      }
+
+      // 2. EFFR — high rate = tightening pressure on equities
+      if(rateVal!==null){
+        if(rateVal>5)       score-=2;
+        else if(rateVal>4)  score-=1;
+        else if(rateVal<3)  score+=1;
+      }
+
+      // 3. GDP QoQ growth
+      var gdpCard=macroData.find(function(m){return m.k==='infl';});
+      var gdpScore=0;
+      if(gdpCard&&gdpCard.data.length>=2){
+        var g0=parseFloat(gdpCard.data[0].value),g1=parseFloat(gdpCard.data[1].value);
+        gdpScore=((g0-g1)/g1*100);
+        if(gdpScore>1)      { score+=1; reasons.push('צמיחה חזקה (GDP +'+gdpScore.toFixed(1)+'% QoQ)'); }
+        else if(gdpScore<0) { score-=1; reasons.push('כיווץ כלכלי (GDP '+gdpScore.toFixed(1)+'% QoQ)'); }
+      }
+
+      // ── Output ────────────────────────────────────────────────────
+      var sig,sigCls;
+      if(score<=-2){
+        sig='🔴 <strong>Hawkish — לחץ על השוק:</strong> ';
+        sig+=reasons.length?reasons.join(' · '):'אינפלציה גבוהה וריבית מגבילה.';
+        sigCls='hawkish';
+      } else if(score>=2){
+        sig='🟢 <strong>Dovish — רוח גבית לשוק:</strong> ';
+        sig+=reasons.length?reasons.join(' · '):'אינפלציה ממותנת וצמיחה תומכת.';
+        sigCls='dovish';
+      } else {
+        // Neutral — enrich with FOMC date
+        var fomcTxt='🟡 <strong>נייטרלי — Macro Bias מאוזן:</strong> ';
+        if(fomcData&&fomcData.date){
+          var fomcDate=new Date(fomcData.date);
+          var now=new Date();
+          var diffDays=Math.round((fomcDate-now)/(1000*60*60*24));
+          var dateStr=fomcDate.toLocaleDateString('he-IL',{day:'numeric',month:'long'});
+          if(diffDays<=0)      fomcTxt+='⚡ ישיבת FOMC היום — החלטת ריבית צפויה עוד היום.';
+          else if(diffDays===1)fomcTxt+='⚡ ישיבת FOMC מחר — עקוב אחרי ההחלטה.';
+          else if(diffDays<=7) fomcTxt+='ישיבת FOMC בעוד '+diffDays+' ימים ('+dateStr+') — עקוב.';
+          else                 fomcTxt+='הפד ממתין. ישיבת FOMC הבאה: '+dateStr+' (בעוד '+diffDays+' ימים).';
+        } else {
+          fomcTxt+=reasons.length?reasons.join(' · '):'הפד ממתין — אין שינוי ריבית צפוי בקרוב.';
+        }
+        sig=fomcTxt; sigCls='neutral';
+      }
       html+='<div class="pulse-macro-signal '+sigCls+'">'+sig+'</div>';
     }
     html+='</div>';
@@ -4413,7 +4448,7 @@ function optRender(expFilter){
   document.getElementById('opt-results').style.display = 'block';
   optRenderAnalysis();
   var _tkr = (_optData.ticker || '').toUpperCase();
-  if (_tkr && getFmpKey()) { fetchTechContext(_tkr); }
+  if (_tkr && (getMdKey() || getFmpKey())) { fetchTechContext(_tkr); }
 }
 
 function fmt(v){ const n=parseFloat(v); if(isNaN(n)) return v||'—'; const a=Math.abs(n); if(a>=1e12)return(n/1e12).toFixed(2)+'T'; if(a>=1e9)return(n/1e9).toFixed(2)+'B'; if(a>=1e6)return(n/1e6).toFixed(2)+'M'; if(a>=1e3)return(n/1e3).toFixed(1)+'K'; return n.toFixed(2); }
@@ -4426,7 +4461,7 @@ async function safeFetch(url){ const r=await fetch(url); const d=await r.json();
 
 /* ── FMP ── */
 const FMP_BASE = 'https://financialmodelingprep.com/stable';
-async function fmpFetch(endpoint,params={}){ const key=getFmpKey(); if(!key)throw new Error('NO_FMP_KEY'); const q=new URLSearchParams({...params,apikey:key}); const r=await fetch(`${FMP_BASE}/${endpoint}?${q}`); const d=await r.json(); if(d&&d['Error Message'])throw new Error('FMP_ERROR'); if(d&&d.message&&d.message.includes('limit'))throw new Error('FMP_LIMIT'); if(Array.isArray(d)&&d.length===0)throw new Error('NO_DATA'); return d; }
+async function fmpFetch(endpoint,params={}){ const key=getFmpKey(); if(!key)throw new Error('NO_FMP_KEY'); const q=new URLSearchParams({...params,apikey:key}); const r=await fetch(`${FMP_BASE}/${endpoint}?${q}`); if(r.status===401||r.status===403)throw new Error('FMP_AUTH'); if(r.status===429)throw new Error('FMP_LIMIT'); const d=await r.json(); if(d&&d['Error Message'])throw new Error('FMP_ERROR'); const msg=String((d&&(d.message||d.Message||d.error))||''); if(msg&&/limit|quota|upgrade|exceed|credit/i.test(msg))throw new Error('FMP_LIMIT'); if(msg&&/invalid|unauthorized|forbidden/i.test(msg))throw new Error('FMP_AUTH'); if(Array.isArray(d)&&d.length===0)throw new Error('NO_DATA'); return d; }
 async function fmpGetOverview(sym){ const[profileRaw,incomeRaw,balanceRaw]=await Promise.allSettled([fmpFetch('profile',{symbol:sym}),fmpFetch('income-statement',{symbol:sym,limit:1}),fmpFetch('balance-sheet-statement',{symbol:sym,limit:1})]); const p=(profileRaw.status==='fulfilled'&&Array.isArray(profileRaw.value)?profileRaw.value[0]:profileRaw.value)||{}; const inc=(incomeRaw.status==='fulfilled'&&Array.isArray(incomeRaw.value)?incomeRaw.value[0]:incomeRaw.value)||{}; const bal=(balanceRaw.status==='fulfilled'&&Array.isArray(balanceRaw.value)?balanceRaw.value[0]:balanceRaw.value)||{}; if(!p.symbol)throw new Error('NO_DATA'); const profitMargin=inc.revenue&&inc.netIncome?inc.netIncome/inc.revenue:null; const operMargin=inc.revenue&&inc.operatingIncome?inc.operatingIncome/inc.revenue:null; const roa=bal.totalAssets&&inc.netIncome?inc.netIncome/bal.totalAssets:null; const roe=(bal.totalStockholdersEquity||bal.totalEquity)&&inc.netIncome?inc.netIncome/(bal.totalStockholdersEquity||bal.totalEquity):null; const eps=inc.eps||(inc.netIncome&&p.marketCap&&p.price?inc.netIncome/(p.marketCap/p.price):null); const pe=eps&&p.price?p.price/eps:null; const payoutRatio=eps&&p.lastDividend?p.lastDividend/eps:null; const dOv={Symbol:p.symbol?.toUpperCase(),Name:p.companyName,Sector:p.sector,Exchange:p.exchange,MarketCapitalization:p.marketCap,PERatio:pe,PEGRatio:null,EPS:eps,EnterpriseValueToRevenue:null,EnterpriseValueToEBITDA:null,RevenueTTM:inc.revenue,ProfitMargin:profitMargin,OperatingMarginTTM:operMargin,ReturnOnAssetsTTM:roa,ReturnOnEquityTTM:roe,DividendYield:(p.lastDividend!=null&&p.lastDividend>0&&p.price)?p.lastDividend/p.price:null,DividendPerShare:(p.lastDividend!=null&&p.lastDividend>0)?p.lastDividend:null,PayoutRatio:payoutRatio,Beta:p.beta,_source:'FMP'}; const dInc={annualReports:[{fiscalDateEnding:inc.date,totalRevenue:inc.revenue,grossProfit:inc.grossProfit,operatingIncome:inc.operatingIncome,netIncome:inc.netIncome,ebitda:inc.ebitda,researchAndDevelopment:inc.researchAndDevelopmentExpenses,interestExpense:inc.interestExpense||0}],quarterlyReports:[]}; const dBal={annualReports:[{fiscalDateEnding:bal.date,totalAssets:bal.totalAssets,totalLiabilities:bal.totalLiabilities,totalShareholderEquity:bal.totalStockholdersEquity||bal.totalEquity,cashAndCashEquivalentsAtCarryingValue:bal.cashAndCashEquivalents,shortTermDebt:bal.shortTermDebt,longTermDebt:bal.longTermDebt,totalCurrentAssets:bal.totalCurrentAssets,totalCurrentLiabilities:bal.totalCurrentLiabilities}],quarterlyReports:[]}; return{dOv,dInc,dBal}; }
 async function fmpGetExtras(sym){ if(!getFmpKey())return{}; const[quoteRaw,cfRaw,ptRaw,gradesRaw]=await Promise.allSettled([fmpFetch('quote',{symbol:sym}),fmpFetch('cash-flow-statement',{symbol:sym,limit:2}),fmpFetch('price-target-consensus',{symbol:sym}),fmpFetch('grades-consensus',{symbol:sym})]); const quote=(quoteRaw.status==='fulfilled'&&Array.isArray(quoteRaw.value)?quoteRaw.value[0]:quoteRaw.value)||{}; const cfArr=(cfRaw.status==='fulfilled'&&Array.isArray(cfRaw.value)?cfRaw.value:[])||[]; const cf=cfArr[0]||{}; const cf2=cfArr[1]||{}; const pt=(ptRaw.status==='fulfilled'&&Array.isArray(ptRaw.value)?ptRaw.value[0]:ptRaw.value)||{}; const grades=(gradesRaw.status==='fulfilled'&&Array.isArray(gradesRaw.value)?gradesRaw.value[0]:gradesRaw.value)||{}; return{quote,cf,cf2,pt,grades}; }
 async function fmpGetQuarterlyIncome(sym){ const data=await fmpFetch('income-statement',{symbol:sym,period:'quarter',limit:12}); if(!Array.isArray(data)||!data.length)throw new Error('FMP_ERROR'); return{quarterlyReports:data.map(q=>({fiscalDateEnding:q.date,fiscalYear:q.fiscalYear,period:q.period,totalRevenue:q.revenue,grossProfit:q.grossProfit,operatingIncome:q.operatingIncome,netIncome:q.netIncome,ebitda:q.ebitda,researchAndDevelopment:q.researchAndDevelopmentExpenses,interestExpense:q.interestExpense,eps:q.eps,epsDiluted:q.epsdiluted,reportedEPS:q.eps,estimatedEPS:null,surprise:null,surprisePercentage:null}))}; }
@@ -5289,7 +5324,7 @@ document.addEventListener('DOMContentLoaded',function(){
 // ══ END SPREAD CALC ══
 
 
-// ── Technical Context from FMP ──
+// ── Technical Context — MarketData first, FMP fallback ──
 async function fetchTechContext(ticker) {
   var techDiv   = document.getElementById('opt-tech-context');
   var techInner = document.getElementById('opt-tech-inner');
@@ -5300,20 +5335,57 @@ async function fetchTechContext(ticker) {
   techInner.innerHTML = '<div style="font-size:.75rem;color:var(--muted);grid-column:1/-1;">טוען נתונים טכניים...</div>';
   techWarn.style.display = 'none';
 
+  var price = null, smaVal = null, high52 = null, low52 = null;
+
+  // ── 1. נסה MarketData (Trader plan: IEX/UTP) ──
   try {
-    // Use only 'quote' endpoint — proven to work, contains SMA50 + 52W
-    var quoteRes = await fmpFetch('quote', {symbol: ticker});
-    var q = Array.isArray(quoteRes) ? quoteRes[0] : quoteRes;
-    if (!q || !q.price) throw new Error('NO_DATA');
+    var mdKey = getMdKey();
+    if (mdKey) {
+      var mdQuoteUrl = 'https://api.marketdata.app/v1/stocks/quotes/' + ticker + '/?token=' + mdKey;
+      var mdSmaUrl   = 'https://api.marketdata.app/v1/indicators/sma/' + ticker + '/?token=' + mdKey + '&period=50&countback=1';
+      var [qRes, sRes] = await Promise.allSettled([
+        fetch(mdQuoteUrl).then(r => r.json()),
+        fetch(mdSmaUrl).then(r => r.json())
+      ]);
+      var qd = qRes.status === 'fulfilled' ? qRes.value : null;
+      var sd = sRes.status === 'fulfilled' ? sRes.value : null;
+      // MarketData quotes: { s:'ok', last:[price], 52weekHigh:[h], 52weekLow:[l] }
+      if (qd && qd.s === 'ok' && Array.isArray(qd.last) && qd.last[0] != null) {
+        price  = parseFloat(qd.last[0]);
+        high52 = Array.isArray(qd['52weekHigh']) && qd['52weekHigh'][0] != null ? parseFloat(qd['52weekHigh'][0]) : null;
+        low52  = Array.isArray(qd['52weekLow'])  && qd['52weekLow'][0]  != null ? parseFloat(qd['52weekLow'][0])  : null;
+      }
+      // MarketData SMA: { s:'ok', sma:[value] }
+      if (sd && sd.s === 'ok' && Array.isArray(sd.sma) && sd.sma.length > 0) {
+        smaVal = parseFloat(sd.sma[sd.sma.length - 1]);
+      }
+    }
+  } catch(e) {
+    console.warn('MarketData tech context failed, trying FMP:', e.message);
+  }
 
-    var price  = parseFloat(q.price);
-    var smaVal = parseFloat(q.priceAvg50);
-    var high52 = parseFloat(q.yearHigh);
-    var low52  = parseFloat(q.yearLow);
+  // ── 2. Fallback ל-FMP אם MD לא החזיר מחיר ──
+  if (price === null) {
+    try {
+      var quoteRes = await fmpFetch('quote', {symbol: ticker});
+      var q = Array.isArray(quoteRes) ? quoteRes[0] : quoteRes;
+      if (!q || !q.price) throw new Error('NO_DATA');
+      price  = parseFloat(q.price);
+      smaVal = parseFloat(q.priceAvg50);
+      high52 = parseFloat(q.yearHigh);
+      low52  = parseFloat(q.yearLow);
+    } catch(e2) {
+      techInner.innerHTML = '<div style="font-size:.75rem;color:var(--muted);grid-column:1/-1;">לא ניתן לטעון נתונים טכניים</div>';
+      console.warn('Tech context error:', e2.message);
+      return;
+    }
+  }
 
-    var smaDiff  = (!isNaN(price) && !isNaN(smaVal) && smaVal > 0)
+  try {
+
+    var smaDiff  = (!isNaN(price) && smaVal != null && !isNaN(smaVal) && smaVal > 0)
       ? ((price - smaVal) / smaVal * 100) : null;
-    var range52  = (!isNaN(price) && !isNaN(high52) && !isNaN(low52) && high52 > low52)
+    var range52  = (!isNaN(price) && high52 != null && low52 != null && !isNaN(high52) && !isNaN(low52) && high52 > low52)
       ? ((price - low52) / (high52 - low52) * 100) : null;
 
     function techCard(label, val, color, sub) {
@@ -5362,7 +5434,7 @@ async function fetchTechContext(ticker) {
     }
 
   } catch(e) {
-    techInner.innerHTML = '<div style="font-size:.75rem;color:var(--muted);grid-column:1/-1;">לא ניתן לטעון נתונים טכניים מ-FMP</div>';
+    techInner.innerHTML = '<div style="font-size:.75rem;color:var(--muted);grid-column:1/-1;">לא ניתן לטעון נתונים טכניים</div>';
     console.warn('Tech context error:', e.message);
   }
 }
