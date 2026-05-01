@@ -5324,7 +5324,7 @@ document.addEventListener('DOMContentLoaded',function(){
 // ══ END SPREAD CALC ══
 
 
-// ── Technical Context — MarketData first, FMP fallback ──
+// ── Technical Context — MarketData first, FMP fills gaps ──
 async function fetchTechContext(ticker) {
   var techDiv   = document.getElementById('opt-tech-context');
   var techInner = document.getElementById('opt-tech-inner');
@@ -5337,7 +5337,7 @@ async function fetchTechContext(ticker) {
 
   var price = null, smaVal = null, high52 = null, low52 = null;
 
-  // ── 1. נסה MarketData (Trader plan: IEX/UTP) ──
+  // ── 1. נסה MarketData ──
   try {
     var mdKey = getMdKey();
     if (mdKey) {
@@ -5349,36 +5349,46 @@ async function fetchTechContext(ticker) {
       ]);
       var qd = qRes.status === 'fulfilled' ? qRes.value : null;
       var sd = sRes.status === 'fulfilled' ? sRes.value : null;
-      // MarketData quotes: { s:'ok', last:[price], 52weekHigh:[h], 52weekLow:[l] }
+      // מחיר
       if (qd && qd.s === 'ok' && Array.isArray(qd.last) && qd.last[0] != null) {
-        price  = parseFloat(qd.last[0]);
-        high52 = Array.isArray(qd['52weekHigh']) && qd['52weekHigh'][0] != null ? parseFloat(qd['52weekHigh'][0]) : null;
-        low52  = Array.isArray(qd['52weekLow'])  && qd['52weekLow'][0]  != null ? parseFloat(qd['52weekLow'][0])  : null;
+        price = parseFloat(qd.last[0]);
       }
-      // MarketData SMA: { s:'ok', sma:[value] }
+      // 52W — זמין ב-Trader plan בלבד
+      if (qd && Array.isArray(qd['52weekHigh']) && qd['52weekHigh'][0] != null) {
+        high52 = parseFloat(qd['52weekHigh'][0]);
+      }
+      if (qd && Array.isArray(qd['52weekLow']) && qd['52weekLow'][0] != null) {
+        low52 = parseFloat(qd['52weekLow'][0]);
+      }
+      // SMA50 — זמין ב-Trader plan בלבד
       if (sd && sd.s === 'ok' && Array.isArray(sd.sma) && sd.sma.length > 0) {
         smaVal = parseFloat(sd.sma[sd.sma.length - 1]);
       }
     }
   } catch(e) {
-    console.warn('MarketData tech context failed, trying FMP:', e.message);
+    console.warn('MarketData tech context failed:', e.message);
   }
 
-  // ── 2. Fallback ל-FMP אם MD לא החזיר מחיר ──
-  if (price === null) {
+  // ── 2. FMP ממלא פערים (SMA50/52W חסרים ב-free plan של MD) ──
+  if ((price === null || smaVal === null || high52 === null) && getFmpKey()) {
     try {
       var quoteRes = await fmpFetch('quote', {symbol: ticker});
       var q = Array.isArray(quoteRes) ? quoteRes[0] : quoteRes;
-      if (!q || !q.price) throw new Error('NO_DATA');
-      price  = parseFloat(q.price);
-      smaVal = parseFloat(q.priceAvg50);
-      high52 = parseFloat(q.yearHigh);
-      low52  = parseFloat(q.yearLow);
+      if (q && q.price) {
+        if (price  === null) price  = parseFloat(q.price);
+        if (smaVal === null) smaVal = parseFloat(q.priceAvg50);
+        if (high52 === null) high52 = parseFloat(q.yearHigh);
+        if (low52  === null) low52  = parseFloat(q.yearLow);
+      }
     } catch(e2) {
-      techInner.innerHTML = '<div style="font-size:.75rem;color:var(--muted);grid-column:1/-1;">לא ניתן לטעון נתונים טכניים</div>';
-      console.warn('Tech context error:', e2.message);
-      return;
+      console.warn('FMP tech context fallback failed:', e2.message);
     }
+  }
+
+  // ── 3. אם אין מחיר בכלל — הודעת שגיאה ──
+  if (price === null) {
+    techInner.innerHTML = '<div style="font-size:.75rem;color:var(--muted);grid-column:1/-1;">לא ניתן לטעון נתונים טכניים — נדרש FMP key או Trader plan</div>';
+    return;
   }
 
   try {
